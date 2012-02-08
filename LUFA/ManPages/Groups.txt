@@ -13,8 +13,13 @@
  *
  *  Functions, macros, variables, enums and types related to the control of AVR subsystems.
  */
- 
+
 /** @defgroup Group_MiscDrivers Miscellaneous Drivers
  *
  *  Miscellaneous driver Functions, macros, variables, enums and types.
+ */
+
+/** @defgroup Group_PlatformDrivers System Platform Drivers
+ *
+ *  Drivers relating to the general architecture platform, such as clock setup and interrupt management.
  */

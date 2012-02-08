@@ -1,58 +1,91 @@
 #
 #             LUFA Library
-#     Copyright (C) Dean Camera, 2009.
-#              
+#     Copyright (C) Dean Camera, 2011.
+#
 #  dean [at] fourwalledcubicle [dot] com
-#      www.fourwalledcubicle.com
+#           www.lufa-lib.org
 #
 
-# Makefile for the LUFA library itself.
+# Makefile for the LUFA library itself. This can be used to generate the library documentation.
 
-LUFA_SRC_FILES =     ./Drivers/USB/LowLevel/DevChapter9.c        \
-                     ./Drivers/USB/LowLevel/Endpoint.c           \
-                     ./Drivers/USB/LowLevel/Host.c               \
-                     ./Drivers/USB/LowLevel/HostChapter9.c       \
-                     ./Drivers/USB/LowLevel/LowLevel.c           \
-                     ./Drivers/USB/LowLevel/Pipe.c               \
-                     ./Drivers/USB/HighLevel/Events.c            \
-                     ./Drivers/USB/HighLevel/USBInterrupt.c      \
-                     ./Drivers/USB/HighLevel/USBTask.c           \
-                     ./Drivers/USB/HighLevel/ConfigDescriptor.c  \
-                     ./Drivers/USB/Class/Device/Audio.c          \
-                     ./Drivers/USB/Class/Device/CDC.c            \
-                     ./Drivers/USB/Class/Device/HID.c            \
-                     ./Drivers/USB/Class/Device/MIDI.c           \
-                     ./Drivers/USB/Class/Device/MassStorage.c    \
-                     ./Drivers/USB/Class/Device/RNDIS.c          \
-                     ./Drivers/USB/Class/Host/CDC.c              \
-                     ./Drivers/USB/Class/Host/HID.c              \
-                     ./Drivers/USB/Class/Host/HIDParser.c        \
-                     ./Drivers/USB/Class/Host/MassStorage.c      \
-                     ./Drivers/USB/Class/Host/Printer.c          \
-                     ./Drivers/USB/Class/Host/StillImage.c       \
-                     ./Drivers/Board/Temperature.c               \
-                     ./Drivers/Peripheral/Serial.c               \
-                     ./Drivers/Peripheral/SerialStream.c         \
 
-LUFA_Events.lst:
-	@echo
-	@echo Generating LUFA event name list...
-	@$(shell) cat `find ./ -name "*.h"` | grep -E "EVENT_[^\(]*\(" | \
-	              sed -n -e 's/^.*EVENT_/EVENT_/p' | \
-	              cut -d'(' -f1 | sort | uniq | tee LUFA_Events.lst
-				  
-all: LUFA_Events.lst
+# Check to see if the LUFA_PATH variable has not been set (the makefile is not being included from a project makefile)
+ifeq ($(origin LUFA_PATH), undefined)
+   LUFA_ROOT_PATH = .
+   ARCH = {AVR8,UC3,XMEGA}
+else
+   LUFA_ROOT_PATH = $(LUFA_PATH)/LUFA
+endif
 
-clean:
-	rm -f $(LUFA_SRC_FILES:%.c=%.o)
-	rm -f LUFA_Events.lst
-	
-clean_list:
+# Check to see if the chip architecture has not been defined in the user makefile, set a default architecture if not
+ifeq ($(origin ARCH), undefined)
+   ARCH = AVR8
+endif
 
-doxygen:
-	@echo Generating Library Documentation...
-	@doxygen Doxygen.conf
+# Define module source file lists
+LUFA_SRC_USB          = $(LUFA_ROOT_PATH)/Drivers/USB/Core/$(ARCH)/Device_$(ARCH).c         \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/$(ARCH)/Endpoint_$(ARCH).c       \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/$(ARCH)/Host_$(ARCH).c           \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/$(ARCH)/Pipe_$(ARCH).c           \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/$(ARCH)/USBController_$(ARCH).c  \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/$(ARCH)/USBInterrupt_$(ARCH).c   \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/$(ARCH)/EndpointStream_$(ARCH).c \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/$(ARCH)/PipeStream_$(ARCH).c     \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/ConfigDescriptor.c               \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/DeviceStandardReq.c              \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/Events.c                         \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/HostStandardReq.c                \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Core/USBTask.c                        \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Common/HIDParser.c
+LUFA_SRC_USBCLASS     = $(LUFA_ROOT_PATH)/Drivers/USB/Class/Device/Audio.c                  \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Device/CDC.c                    \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Device/HID.c                    \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Device/MassStorage.c            \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Device/MIDI.c                   \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Device/RNDIS.c                  \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Host/Audio.c                    \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Host/CDC.c                      \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Host/HID.c                      \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Host/MassStorage.c              \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Host/MIDI.c                     \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Host/Printer.c                  \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Host/RNDIS.c                    \
+                        $(LUFA_ROOT_PATH)/Drivers/USB/Class/Host/StillImage.c
+LUFA_SRC_TEMPERATURE  = $(LUFA_ROOT_PATH)/Drivers/Board/Temperature.c
+LUFA_SRC_SERIAL       = $(LUFA_ROOT_PATH)/Drivers/Peripheral/$(ARCH)/Serial_$(ARCH).c
+LUFA_SRC_TWI          = $(LUFA_ROOT_PATH)/Drivers/Peripheral/$(ARCH)/TWI_$(ARCH).c
+LUFA_SRC_SCHEDULER    = $(LUFA_ROOT_PATH)/Scheduler/Scheduler.c
+
+
+# Check to see if the LUFA_PATH variable has not been set (the makefile is not being included from a project makefile)
+ifeq ($(origin LUFA_PATH), undefined)
+   LUFA_SRC_ALL_FILES = $(LUFA_SRC_USB)            \
+                        $(LUFA_SRC_USBCLASS)       \
+                        $(LUFA_SRC_TEMPERATURE)    \
+                        $(LUFA_SRC_SERIAL)         \
+                        $(LUFA_SRC_TWI)            \
+                        $(LUFA_SRC_SCHEDULER)
+
+   all:
+
+   clean:
+	rm -f $(LUFA_SRC_ALL_FILES:%.c=%.o)
+	rm -f $(LUFA_SRC_ALL_FILES:%.c=%.lst)
+
+   clean_list:
+
+   doxygen:
+	@echo Generating LUFA Library Documentation...
+	( cat Doxygen.conf ; echo "PROJECT_NUMBER=`grep LUFA_VERSION_STRING Version.h | cut -d'"' -f2`" ) | doxygen -
 	@echo Documentation Generation Complete.
 
-clean_doxygen:
+   clean_doxygen:
 	rm -rf Documentation
+
+   checksource:
+
+   version:
+	@echo "LUFA `grep LUFA_VERSION_STRING Version.h | cut -d'"' -f2`"
+
+   .PHONY: all clean clean_list doxygen clean_doxygen version
+endif

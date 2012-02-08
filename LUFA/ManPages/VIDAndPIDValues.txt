@@ -14,7 +14,7 @@
  *  <b>These VID/PID values should not be used in commercial designs under any circumstances.</b> Private projects
  *  may use the following values freely, but must accept any collisions due to other LUFA derived private projects
  *  sharing identical values. It is suggested that private projects using interfaces compatible with existing
- *  demos share the save VID/PID value.
+ *  demos share the same VID/PID value.
  *
  *  <table>
  *
@@ -193,7 +193,7 @@
  *     0x204D
  *    </td>
  *    <td>
- *     Keyboard and Mouse Combination Demo Application
+ *     Combined Keyboard and Mouse Demo Application
  *    </td>
  *   </tr>
  *
@@ -265,7 +265,7 @@
  *     0x2063
  *    </td>
  *    <td>
- *     <i>Currently Unallocated</i>
+ *     Mass Storage/HID Interface Datalogger Project
  *    </td>
  *   </tr>
  *
@@ -277,7 +277,7 @@
  *     0x2064
  *    </td>
  *    <td>
- *     <i>Currently Unallocated</i>
+ *     Interfaceless Control-Only LUFA Devices
  *    </td>
  *   </tr>
  *
@@ -289,7 +289,7 @@
  *     0x2065
  *    </td>
  *    <td>
- *     <i>Currently Unallocated</i>
+ *     Test and Measurement Demo
  *    </td>
  *   </tr>
  *
@@ -301,7 +301,7 @@
  *     0x2066
  *    </td>
  *    <td>
- *     <i>Currently Unallocated</i>
+ *     Multiple Report Keyboard/Mouse HID Demo
  *    </td>
  *   </tr>
  *
@@ -313,7 +313,7 @@
  *     0x2067
  *    </td>
  *    <td>
- *     <i>Currently Unallocated</i>
+ *     HID Class Bootloader
  *    </td>
  *   </tr>
  *
@@ -325,7 +325,7 @@
  *     0x2068
  *    </td>
  *    <td>
- *     <i>Currently Unallocated</i>
+ *     Virtual Serial/Mass Storage Demo
  *    </td>
  *   </tr>
  *
@@ -337,7 +337,7 @@
  *     0x2069
  *    </td>
  *    <td>
- *     <i>Currently Unallocated</i>
+ *     Webserver Project
  *    </td>
  *   </tr>
  *
@@ -349,7 +349,7 @@
  *     0x206A
  *    </td>
  *    <td>
- *     <i>Currently Unallocated</i>
+ *     Media Control Project
  *    </td>
  *   </tr>
  *
@@ -421,3 +421,4 @@
  *  to be resolved by using a unique release number in the Device Descriptor. No devices using this
  *  VID/PID combination may be released to the general public.
  */
+
