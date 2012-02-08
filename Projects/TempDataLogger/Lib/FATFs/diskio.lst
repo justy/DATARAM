@@ -1,0 +1,246 @@
+   1               		.file	"diskio.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.disk_initialize,"ax",@progbits
+  17               	.global	disk_initialize
+  19               	disk_initialize:
+  20               	.LFB133:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25               	.LSM1:
+  26 0000 80E0      		ldi r24,lo8(0)
+  27               	.LVL1:
+  28               	/* epilogue start */
+  29 0002 0895      		ret
+  30               	.LFE133:
+  32               		.section	.text.disk_status,"ax",@progbits
+  33               	.global	disk_status
+  35               	disk_status:
+  36               	.LFB134:
+  37               	.LSM2:
+  38               	.LVL2:
+  39               	/* prologue: function */
+  40               	/* frame size = 0 */
+  41               	.LSM3:
+  42 0000 80E0      		ldi r24,lo8(0)
+  43               	.LVL3:
+  44               	/* epilogue start */
+  45 0002 0895      		ret
+  46               	.LFE134:
+  48               		.section	.text.disk_ioctl,"ax",@progbits
+  49               	.global	disk_ioctl
+  51               	disk_ioctl:
+  52               	.LFB137:
+  53               	.LSM4:
+  54               	.LVL4:
+  55               	/* prologue: function */
+  56               	/* frame size = 0 */
+  57               	.LSM5:
+  58 0000 6623      		tst r22
+  59 0002 01F0      		breq .L6
+  60 0004 84E0      		ldi r24,lo8(4)
+  61               	.LVL5:
+  62 0006 0895      		ret
+  63               	.LVL6:
+  64               	.L6:
+  65 0008 80E0      		ldi r24,lo8(0)
+  66               	.LVL7:
+  67               	.LSM6:
+  68 000a 0895      		ret
+  69               	.LFE137:
+  71               		.section	.text.get_fattime,"ax",@progbits
+  72               	.global	get_fattime
+  74               	get_fattime:
+  75               	.LFB138:
+  76               	.LSM7:
+  77 0000 DF93      		push r29
+  78 0002 CF93      		push r28
+  79 0004 00D0      		rcall .
+  80 0006 00D0      		rcall .
+  81 0008 00D0      		rcall .
+  82 000a CDB7      		in r28,__SP_L__
+  83 000c DEB7      		in r29,__SP_H__
+  84               	/* prologue: function */
+  85               	/* frame size = 6 */
+  86               	.LSM8:
+  87 000e CE01      		movw r24,r28
+  88 0010 0196      		adiw r24,1
+  89 0012 0E94 0000 		call DS1307_GetTimeDate
+  90 0016 2C81      		ldd r18,Y+4
+  91 0018 30E0      		ldi r19,lo8(0)
+  92 001a 40E0      		ldi r20,lo8(0)
+  93 001c 50E0      		ldi r21,hi8(0)
+  94 001e A901      		movw r20,r18
+  95 0020 3327      		clr r19
+  96 0022 2227      		clr r18
+  97 0024 8D81      		ldd r24,Y+5
+  98 0026 90E0      		ldi r25,lo8(0)
+  99 0028 A0E0      		ldi r26,lo8(0)
+ 100 002a B0E0      		ldi r27,hi8(0)
+ 101 002c F5E1      		ldi r31,21
+ 102 002e 880F      	1:	lsl r24
+ 103 0030 991F      		rol r25
+ 104 0032 AA1F      		rol r26
+ 105 0034 BB1F      		rol r27
+ 106 0036 FA95      		dec r31
+ 107 0038 01F4      		brne 1b
+ 108 003a 282B      		or r18,r24
+ 109 003c 392B      		or r19,r25
+ 110 003e 4A2B      		or r20,r26
+ 111 0040 5B2B      		or r21,r27
+ 112 0042 8981      		ldd r24,Y+1
+ 113 0044 90E0      		ldi r25,lo8(0)
+ 114 0046 A0E0      		ldi r26,lo8(0)
+ 115 0048 B0E0      		ldi r27,hi8(0)
+ 116 004a EBE0      		ldi r30,11
+ 117 004c 880F      	1:	lsl r24
+ 118 004e 991F      		rol r25
+ 119 0050 AA1F      		rol r26
+ 120 0052 BB1F      		rol r27
+ 121 0054 EA95      		dec r30
+ 122 0056 01F4      		brne 1b
+ 123 0058 282B      		or r18,r24
+ 124 005a 392B      		or r19,r25
+ 125 005c 4A2B      		or r20,r26
+ 126 005e 5B2B      		or r21,r27
+ 127 0060 8A81      		ldd r24,Y+2
+ 128 0062 90E0      		ldi r25,lo8(0)
+ 129 0064 A0E0      		ldi r26,lo8(0)
+ 130 0066 B0E0      		ldi r27,hi8(0)
+ 131 0068 75E0      		ldi r23,5
+ 132 006a 880F      	1:	lsl r24
+ 133 006c 991F      		rol r25
+ 134 006e AA1F      		rol r26
+ 135 0070 BB1F      		rol r27
+ 136 0072 7A95      		dec r23
+ 137 0074 01F4      		brne 1b
+ 138 0076 282B      		or r18,r24
+ 139 0078 392B      		or r19,r25
+ 140 007a 4A2B      		or r20,r26
+ 141 007c 5B2B      		or r21,r27
+ 142 007e 8B81      		ldd r24,Y+3
+ 143 0080 8695      		lsr r24
+ 144 0082 90E0      		ldi r25,lo8(0)
+ 145 0084 A0E0      		ldi r26,lo8(0)
+ 146 0086 B0E0      		ldi r27,hi8(0)
+ 147 0088 282B      		or r18,r24
+ 148 008a 392B      		or r19,r25
+ 149 008c 4A2B      		or r20,r26
+ 150 008e 5B2B      		or r21,r27
+ 151 0090 8E81      		ldd r24,Y+6
+ 152 0092 90E0      		ldi r25,lo8(0)
+ 153 0094 4496      		adiw r24,20
+ 154 0096 AA27      		clr r26
+ 155 0098 97FD      		sbrc r25,7
+ 156 009a A095      		com r26
+ 157 009c BA2F      		mov r27,r26
+ 158 009e 69E1      		ldi r22,25
+ 159 00a0 880F      	1:	lsl r24
+ 160 00a2 991F      		rol r25
+ 161 00a4 AA1F      		rol r26
+ 162 00a6 BB1F      		rol r27
+ 163 00a8 6A95      		dec r22
+ 164 00aa 01F4      		brne 1b
+ 165 00ac 282B      		or r18,r24
+ 166 00ae 392B      		or r19,r25
+ 167 00b0 4A2B      		or r20,r26
+ 168 00b2 5B2B      		or r21,r27
+ 169               	.LSM9:
+ 170 00b4 B901      		movw r22,r18
+ 171 00b6 CA01      		movw r24,r20
+ 172               	/* epilogue start */
+ 173 00b8 2696      		adiw r28,6
+ 174 00ba 0FB6      		in __tmp_reg__,__SREG__
+ 175 00bc F894      		cli
+ 176 00be DEBF      		out __SP_H__,r29
+ 177 00c0 0FBE      		out __SREG__,__tmp_reg__
+ 178 00c2 CDBF      		out __SP_L__,r28
+ 179 00c4 CF91      		pop r28
+ 180 00c6 DF91      		pop r29
+ 181 00c8 0895      		ret
+ 182               	.LFE138:
+ 184               		.section	.text.disk_write,"ax",@progbits
+ 185               	.global	disk_write
+ 187               	disk_write:
+ 188               	.LFB136:
+ 189               	.LSM10:
+ 190               	.LVL8:
+ 191 0000 0F93      		push r16
+ 192               	.LVL9:
+ 193               	/* prologue: function */
+ 194               	/* frame size = 0 */
+ 195 0002 FB01      		movw r30,r22
+ 196               	.LSM11:
+ 197 0004 CA01      		movw r24,r20
+ 198 0006 B901      		movw r22,r18
+ 199               	.LVL10:
+ 200 0008 402F      		mov r20,r16
+ 201               	.LVL11:
+ 202 000a 50E0      		ldi r21,lo8(0)
+ 203 000c 9F01      		movw r18,r30
+ 204               	.LVL12:
+ 205 000e 0E94 0000 		call DataflashManager_WriteBlocks_RAM
+ 206               	.LVL13:
+ 207               	.LSM12:
+ 208 0012 80E0      		ldi r24,lo8(0)
+ 209               	/* epilogue start */
+ 210 0014 0F91      		pop r16
+ 211               	.LVL14:
+ 212 0016 0895      		ret
+ 213               	.LFE136:
+ 215               		.section	.text.disk_read,"ax",@progbits
+ 216               	.global	disk_read
+ 218               	disk_read:
+ 219               	.LFB135:
+ 220               	.LSM13:
+ 221               	.LVL15:
+ 222 0000 0F93      		push r16
+ 223               	.LVL16:
+ 224               	/* prologue: function */
+ 225               	/* frame size = 0 */
+ 226 0002 FB01      		movw r30,r22
+ 227               	.LSM14:
+ 228 0004 CA01      		movw r24,r20
+ 229 0006 B901      		movw r22,r18
+ 230               	.LVL17:
+ 231 0008 402F      		mov r20,r16
+ 232               	.LVL18:
+ 233 000a 50E0      		ldi r21,lo8(0)
+ 234 000c 9F01      		movw r18,r30
+ 235               	.LVL19:
+ 236 000e 0E94 0000 		call DataflashManager_ReadBlocks_RAM
+ 237               	.LVL20:
+ 238               	.LSM15:
+ 239 0012 80E0      		ldi r24,lo8(0)
+ 240               	/* epilogue start */
+ 241 0014 0F91      		pop r16
+ 242               	.LVL21:
+ 243 0016 0895      		ret
+ 244               	.LFE135:
+ 310               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 diskio.c
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:2      *ABS*:0000003f __SREG__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:3      *ABS*:0000003e __SP_H__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:4      *ABS*:0000003d __SP_L__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:5      *ABS*:00000034 __CCP__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:19     .text.disk_initialize:00000000 disk_initialize
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:35     .text.disk_status:00000000 disk_status
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:51     .text.disk_ioctl:00000000 disk_ioctl
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:74     .text.get_fattime:00000000 get_fattime
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:187    .text.disk_write:00000000 disk_write
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccQ34BYw.s:218    .text.disk_read:00000000 disk_read
+
+UNDEFINED SYMBOLS
+DS1307_GetTimeDate
+DataflashManager_WriteBlocks_RAM
+DataflashManager_ReadBlocks_RAM

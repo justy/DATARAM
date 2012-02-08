@@ -1,0 +1,555 @@
+   1               		.file	"MassStorage.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+  17               	.global	EVENT_USB_Device_Connect
+  19               	EVENT_USB_Device_Connect:
+  20               	.LFB122:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LBB37:
+  25               	.LBB38:
+  26               	.LSM1:
+  27 0000 7698      		cbi 46-32,6
+  28               	/* epilogue start */
+  29               	.LBE38:
+  30               	.LBE37:
+  31               	.LSM2:
+  32 0002 0895      		ret
+  33               	.LFE122:
+  35               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+  36               	.global	EVENT_USB_Device_Disconnect
+  38               	EVENT_USB_Device_Disconnect:
+  39               	.LFB123:
+  40               	.LSM3:
+  41               	/* prologue: function */
+  42               	/* frame size = 0 */
+  43               	.LBB39:
+  44               	.LBB40:
+  45               	.LSM4:
+  46 0000 769A      		sbi 46-32,6
+  47               	/* epilogue start */
+  48               	.LBE40:
+  49               	.LBE39:
+  50               	.LSM5:
+  51 0002 0895      		ret
+  52               	.LFE123:
+  54               		.section	.text.CALLBACK_MS_Device_SCSICommandReceived,"ax",@progbits
+  55               	.global	CALLBACK_MS_Device_SCSICommandReceived
+  57               	CALLBACK_MS_Device_SCSICommandReceived:
+  58               	.LFB126:
+  59               	.LSM6:
+  60               	.LVL0:
+  61               	/* prologue: function */
+  62               	/* frame size = 0 */
+  63               	.LBB41:
+  64               	.LBB42:
+  65               	.LSM7:
+  66 0000 7698      		cbi 46-32,6
+  67               	.LBE42:
+  68               	.LBE41:
+  69               	.LSM8:
+  70 0002 0E94 0000 		call SCSI_DecodeSCSICommand
+  71               	.LVL1:
+  72               	.LBB43:
+  73               	.LBB44:
+  74               	.LSM9:
+  75 0006 7698      		cbi 46-32,6
+  76               	/* epilogue start */
+  77               	.LBE44:
+  78               	.LBE43:
+  79               	.LSM10:
+  80 0008 0895      		ret
+  81               	.LFE126:
+  83               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+  84               	.global	EVENT_USB_Device_ControlRequest
+  86               	EVENT_USB_Device_ControlRequest:
+  87               	.LFB125:
+  88               	.LSM11:
+  89               	/* prologue: function */
+  90               	/* frame size = 0 */
+  91               	.LSM12:
+  92 0000 80E0      		ldi r24,lo8(Disk_MS_Interface)
+  93 0002 90E0      		ldi r25,hi8(Disk_MS_Interface)
+  94 0004 0E94 0000 		call MS_Device_ProcessControlRequest
+  95               	/* epilogue start */
+  96               	.LSM13:
+  97 0008 0895      		ret
+  98               	.LFE125:
+ 100               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 101               	.global	EVENT_USB_Device_ConfigurationChanged
+ 103               	EVENT_USB_Device_ConfigurationChanged:
+ 104               	.LFB124:
+ 105               	.LSM14:
+ 106               	/* prologue: function */
+ 107               	/* frame size = 0 */
+ 108               	.LSM15:
+ 109 0000 80E0      		ldi r24,lo8(Disk_MS_Interface)
+ 110 0002 90E0      		ldi r25,hi8(Disk_MS_Interface)
+ 111 0004 0E94 0000 		call MS_Device_ConfigureEndpoints
+ 112               	.LSM16:
+ 113 0008 80FD      		sbrc r24,0
+ 114 000a 00C0      		rjmp .L10
+ 115 000c 90E4      		ldi r25,lo8(64)
+ 116 000e 00C0      		rjmp .L11
+ 117               	.L10:
+ 118 0010 90E0      		ldi r25,lo8(0)
+ 119               	.L11:
+ 120               	.LBB45:
+ 121               	.LBB46:
+ 122               	.LSM17:
+ 123 0012 8EB1      		in r24,46-32
+ 124 0014 8F7B      		andi r24,lo8(-65)
+ 125 0016 982B      		or r25,r24
+ 126 0018 9EB9      		out 46-32,r25
+ 127               	/* epilogue start */
+ 128               	.LBE46:
+ 129               	.LBE45:
+ 130               	.LSM18:
+ 131 001a 0895      		ret
+ 132               	.LFE124:
+ 134               		.section	.text.SetupHardware,"ax",@progbits
+ 135               	.global	SetupHardware
+ 137               	SetupHardware:
+ 138               	.LFB121:
+ 139               	.LSM19:
+ 140               	/* prologue: function */
+ 141               	/* frame size = 0 */
+ 142               	.LSM20:
+ 143 0000 84B7      		in r24,84-32
+ 144 0002 877F      		andi r24,lo8(-9)
+ 145 0004 84BF      		out 84-32,r24
+ 146               	.LSM21:
+ 147 0006 88E1      		ldi r24,lo8(24)
+ 148               	/* #APP */
+ 149               	 ;  128 "MassStorage.c" 1
+ 150 0008 0FB6      		in __tmp_reg__, __SREG__
+ 151 000a F894      		cli
+ 152 000c 8093 6000 		sts 96, r24
+ 153 0010 1092 6000 		sts 96, __zero_reg__
+ 154 0014 0FBE      		out __SREG__,__tmp_reg__
+ 155               		
+ 156               	 ;  0 "" 2
+ 157               	/* #NOAPP */
+ 158               	.LBB47:
+ 159               	.LSM22:
+ 160 0016 80E0      		ldi r24,lo8(0)
+ 161 0018 90E0      		ldi r25,hi8(0)
+ 162 001a 20E8      		ldi r18,lo8(-128)
+ 163               	/* #APP */
+ 164               	 ;  131 "MassStorage.c" 1
+ 165 001c 0FB6      		in __tmp_reg__,__SREG__
+ 166 001e F894      		cli
+ 167 0020 2093 6100 		sts 97, r18
+ 168 0024 8093 6100 		sts 97, r24
+ 169 0028 0FBE      		out __SREG__, __tmp_reg__
+ 170               	 ;  0 "" 2
+ 171               	/* #NOAPP */
+ 172               	.LBE47:
+ 173               	.LBB48:
+ 174               	.LBB49:
+ 175               	.LSM23:
+ 176 002a 6E9A      		sbi 45-32,6
+ 177               	.LSM24:
+ 178 002c 7698      		cbi 46-32,6
+ 179               	.LBE49:
+ 180               	.LBE48:
+ 181               	.LBB50:
+ 182               	.LBB51:
+ 183               	.LSM25:
+ 184 002e 209A      		sbi 36-32,0
+ 185               	.LSM26:
+ 186 0030 289A      		sbi 37-32,0
+ 187               	.LSM27:
+ 188 0032 84B1      		in r24,36-32
+ 189 0034 8660      		ori r24,lo8(6)
+ 190 0036 84B9      		out 36-32,r24
+ 191               	.LSM28:
+ 192 0038 2398      		cbi 36-32,3
+ 193               	.LSM29:
+ 194 003a 2B9A      		sbi 37-32,3
+ 195               	.LSM30:
+ 196 003c 8DB5      		in r24,77-32
+ 197 003e 8160      		ori r24,lo8(1)
+ 198 0040 8DBD      		out 77-32,r24
+ 199               	.LSM31:
+ 200 0042 2098      		cbi 36-32,0
+ 201               	.LSM32:
+ 202 0044 8CE5      		ldi r24,lo8(92)
+ 203 0046 8CBD      		out 76-32,r24
+ 204               	.LBE51:
+ 205               	.LBE50:
+ 206               	.LSM33:
+ 207 0048 0E94 0000 		call USB_Init
+ 208               	.LSM34:
+ 209 004c 0E94 0000 		call DataflashManager_ResetDataflashProtections
+ 210               	/* epilogue start */
+ 211               	.LSM35:
+ 212 0050 0895      		ret
+ 213               	.LFE121:
+ 215               		.section	.text.main,"ax",@progbits
+ 216               	.global	main
+ 218               	main:
+ 219               	.LFB120:
+ 220               	.LSM36:
+ 221 0000 4F92      		push r4
+ 222 0002 5F92      		push r5
+ 223 0004 6F92      		push r6
+ 224 0006 7F92      		push r7
+ 225 0008 8F92      		push r8
+ 226 000a 9F92      		push r9
+ 227 000c AF92      		push r10
+ 228 000e BF92      		push r11
+ 229 0010 CF92      		push r12
+ 230 0012 DF92      		push r13
+ 231 0014 EF92      		push r14
+ 232 0016 FF92      		push r15
+ 233 0018 0F93      		push r16
+ 234 001a 1F93      		push r17
+ 235 001c CF93      		push r28
+ 236 001e DF93      		push r29
+ 237               	/* prologue: function */
+ 238               	/* frame size = 0 */
+ 239               	.LSM37:
+ 240 0020 80E8      		ldi r24,lo8(-128)
+ 241 0022 8093 6100 		sts 97,r24
+ 242 0026 1092 6100 		sts 97,__zero_reg__
+ 243               	.LSM38:
+ 244 002a 569A      		sbi 42-32,6
+ 245               	.LSM39:
+ 246 002c 5E98      		cbi 43-32,6
+ 247 002e C0E0      		ldi r28,lo8(0)
+ 248 0030 D0E0      		ldi r29,hi8(0)
+ 249               	.LVL2:
+ 250               	.LBB52:
+ 251               	.LBB53:
+ 252               	.LBB54:
+ 253               	.LBB55:
+ 254               	.LSM40:
+ 255 0032 80E9      		ldi r24,lo8(400)
+ 256 0034 482E      		mov r4,r24
+ 257 0036 81E0      		ldi r24,hi8(400)
+ 258 0038 582E      		mov r5,r24
+ 259               	.LVL3:
+ 260               	.L32:
+ 261               	.LBE55:
+ 262               	.LBE54:
+ 263               	.LBE53:
+ 264               	.LBE52:
+ 265               	.LSM41:
+ 266 003a 5E9A      		sbi 43-32,6
+ 267               	.LSM42:
+ 268 003c BE01      		movw r22,r28
+ 269 003e 8827      		clr r24
+ 270 0040 77FD      		sbrc r23,7
+ 271 0042 8095      		com r24
+ 272 0044 982F      		mov r25,r24
+ 273               	.LVL4:
+ 274 0046 0E94 0000 		call __floatsisf
+ 275               	.LVL5:
+ 276 004a 3B01      		movw r6,r22
+ 277 004c 4C01      		movw r8,r24
+ 278 004e 2DEC      		ldi r18,lo8(0x3dcccccd)
+ 279 0050 3CEC      		ldi r19,hi8(0x3dcccccd)
+ 280 0052 4CEC      		ldi r20,hlo8(0x3dcccccd)
+ 281 0054 5DE3      		ldi r21,hhi8(0x3dcccccd)
+ 282 0056 0E94 0000 		call __mulsf3
+ 283 005a 20E0      		ldi r18,lo8(0x3f800000)
+ 284 005c 30E0      		ldi r19,hi8(0x3f800000)
+ 285 005e 40E8      		ldi r20,hlo8(0x3f800000)
+ 286 0060 5FE3      		ldi r21,hhi8(0x3f800000)
+ 287 0062 0E94 0000 		call __addsf3
+ 288 0066 5B01      		movw r10,r22
+ 289 0068 6C01      		movw r12,r24
+ 290               	.LBB61:
+ 291               	.LBB60:
+ 292               	.LSM43:
+ 293 006a 20E0      		ldi r18,lo8(0x457a0000)
+ 294 006c 30E0      		ldi r19,hi8(0x457a0000)
+ 295 006e 4AE7      		ldi r20,hlo8(0x457a0000)
+ 296 0070 55E4      		ldi r21,hhi8(0x457a0000)
+ 297 0072 0E94 0000 		call __mulsf3
+ 298 0076 7B01      		movw r14,r22
+ 299 0078 8C01      		movw r16,r24
+ 300               	.LSM44:
+ 301 007a 20E0      		ldi r18,lo8(0x3f800000)
+ 302 007c 30E0      		ldi r19,hi8(0x3f800000)
+ 303 007e 40E8      		ldi r20,hlo8(0x3f800000)
+ 304 0080 5FE3      		ldi r21,hhi8(0x3f800000)
+ 305 0082 0E94 0000 		call __ltsf2
+ 306 0086 8823      		tst r24
+ 307 0088 04F4      		brge .L40
+ 308 008a 61E0      		ldi r22,lo8(1)
+ 309 008c 70E0      		ldi r23,hi8(1)
+ 310               	.LVL6:
+ 311 008e 00C0      		rjmp .L18
+ 312               	.LVL7:
+ 313               	.L40:
+ 314               	.LSM45:
+ 315 0090 C801      		movw r24,r16
+ 316 0092 B701      		movw r22,r14
+ 317 0094 20E0      		ldi r18,lo8(0x477fff00)
+ 318 0096 3FEF      		ldi r19,hi8(0x477fff00)
+ 319 0098 4FE7      		ldi r20,hlo8(0x477fff00)
+ 320 009a 57E4      		ldi r21,hhi8(0x477fff00)
+ 321 009c 0E94 0000 		call __gtsf2
+ 322 00a0 1816      		cp __zero_reg__,r24
+ 323 00a2 04F4      		brge .L41
+ 324               	.LSM46:
+ 325 00a4 C601      		movw r24,r12
+ 326 00a6 B501      		movw r22,r10
+ 327 00a8 20E0      		ldi r18,lo8(0x41200000)
+ 328 00aa 30E0      		ldi r19,hi8(0x41200000)
+ 329 00ac 40E2      		ldi r20,hlo8(0x41200000)
+ 330 00ae 51E4      		ldi r21,hhi8(0x41200000)
+ 331 00b0 0E94 0000 		call __mulsf3
+ 332 00b4 0E94 0000 		call __fixunssfsi
+ 333 00b8 00C0      		rjmp .L21
+ 334               	.LVL8:
+ 335               	.L22:
+ 336               	.LBB57:
+ 337               	.LBB56:
+ 338               	.LSM47:
+ 339 00ba C201      		movw r24,r4
+ 340               	/* #APP */
+ 341               	 ;  105 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/delay_bas
+ 342 00bc 0197      		1: sbiw r24,1
+ 343 00be 01F4      		brne 1b
+ 344               	 ;  0 "" 2
+ 345               	/* #NOAPP */
+ 346               	.LBE56:
+ 347               	.LBE57:
+ 348               	.LSM48:
+ 349 00c0 6150      		subi r22,lo8(-(-1))
+ 350 00c2 7040      		sbci r23,hi8(-(-1))
+ 351               	.L21:
+ 352               	.LSM49:
+ 353 00c4 6115      		cp r22,__zero_reg__
+ 354 00c6 7105      		cpc r23,__zero_reg__
+ 355 00c8 01F4      		brne .L22
+ 356 00ca 00C0      		rjmp .L23
+ 357               	.LVL9:
+ 358               	.L41:
+ 359               	.LSM50:
+ 360 00cc C801      		movw r24,r16
+ 361 00ce B701      		movw r22,r14
+ 362 00d0 0E94 0000 		call __fixunssfsi
+ 363               	.LVL10:
+ 364               	.L18:
+ 365               	.LBB58:
+ 366               	.LBB59:
+ 367               	.LSM51:
+ 368 00d4 CB01      		movw r24,r22
+ 369               	.LVL11:
+ 370               	/* #APP */
+ 371               	 ;  105 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/delay_bas
+ 372 00d6 0197      		1: sbiw r24,1
+ 373 00d8 01F4      		brne 1b
+ 374               	 ;  0 "" 2
+ 375               	.LVL12:
+ 376               	/* #NOAPP */
+ 377               	.L23:
+ 378               	.LBE59:
+ 379               	.LBE58:
+ 380               	.LBE60:
+ 381               	.LBE61:
+ 382               	.LSM52:
+ 383 00da 5E98      		cbi 43-32,6
+ 384               	.LSM53:
+ 385 00dc C401      		movw r24,r8
+ 386 00de B301      		movw r22,r6
+ 387               	.LVL13:
+ 388 00e0 2DEC      		ldi r18,lo8(0xbdcccccd)
+ 389 00e2 3CEC      		ldi r19,hi8(0xbdcccccd)
+ 390 00e4 4CEC      		ldi r20,hlo8(0xbdcccccd)
+ 391 00e6 5DEB      		ldi r21,hhi8(0xbdcccccd)
+ 392 00e8 0E94 0000 		call __mulsf3
+ 393               	.LVL14:
+ 394 00ec 20E0      		ldi r18,lo8(0x41a80000)
+ 395 00ee 30E0      		ldi r19,hi8(0x41a80000)
+ 396 00f0 48EA      		ldi r20,hlo8(0x41a80000)
+ 397 00f2 51E4      		ldi r21,hhi8(0x41a80000)
+ 398 00f4 0E94 0000 		call __addsf3
+ 399 00f8 5B01      		movw r10,r22
+ 400 00fa 6C01      		movw r12,r24
+ 401               	.LBB62:
+ 402               	.LBB63:
+ 403               	.LSM54:
+ 404 00fc 20E0      		ldi r18,lo8(0x457a0000)
+ 405 00fe 30E0      		ldi r19,hi8(0x457a0000)
+ 406 0100 4AE7      		ldi r20,hlo8(0x457a0000)
+ 407 0102 55E4      		ldi r21,hhi8(0x457a0000)
+ 408 0104 0E94 0000 		call __mulsf3
+ 409 0108 7B01      		movw r14,r22
+ 410 010a 8C01      		movw r16,r24
+ 411               	.LSM55:
+ 412 010c 20E0      		ldi r18,lo8(0x3f800000)
+ 413 010e 30E0      		ldi r19,hi8(0x3f800000)
+ 414 0110 40E8      		ldi r20,hlo8(0x3f800000)
+ 415 0112 5FE3      		ldi r21,hhi8(0x3f800000)
+ 416 0114 0E94 0000 		call __ltsf2
+ 417 0118 8823      		tst r24
+ 418 011a 04F4      		brge .L42
+ 419 011c 61E0      		ldi r22,lo8(1)
+ 420 011e 70E0      		ldi r23,hi8(1)
+ 421               	.LVL15:
+ 422 0120 00C0      		rjmp .L26
+ 423               	.LVL16:
+ 424               	.L42:
+ 425               	.LSM56:
+ 426 0122 C801      		movw r24,r16
+ 427 0124 B701      		movw r22,r14
+ 428 0126 20E0      		ldi r18,lo8(0x477fff00)
+ 429 0128 3FEF      		ldi r19,hi8(0x477fff00)
+ 430 012a 4FE7      		ldi r20,hlo8(0x477fff00)
+ 431 012c 57E4      		ldi r21,hhi8(0x477fff00)
+ 432 012e 0E94 0000 		call __gtsf2
+ 433 0132 1816      		cp __zero_reg__,r24
+ 434 0134 04F4      		brge .L43
+ 435               	.LSM57:
+ 436 0136 C601      		movw r24,r12
+ 437 0138 B501      		movw r22,r10
+ 438 013a 20E0      		ldi r18,lo8(0x41200000)
+ 439 013c 30E0      		ldi r19,hi8(0x41200000)
+ 440 013e 40E2      		ldi r20,hlo8(0x41200000)
+ 441 0140 51E4      		ldi r21,hhi8(0x41200000)
+ 442 0142 0E94 0000 		call __mulsf3
+ 443 0146 0E94 0000 		call __fixunssfsi
+ 444 014a 00C0      		rjmp .L29
+ 445               	.LVL17:
+ 446               	.L30:
+ 447               	.LBB64:
+ 448               	.LBB65:
+ 449               	.LSM58:
+ 450 014c C201      		movw r24,r4
+ 451               	/* #APP */
+ 452               	 ;  105 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/delay_bas
+ 453 014e 0197      		1: sbiw r24,1
+ 454 0150 01F4      		brne 1b
+ 455               	 ;  0 "" 2
+ 456               	/* #NOAPP */
+ 457               	.LBE65:
+ 458               	.LBE64:
+ 459               	.LSM59:
+ 460 0152 6150      		subi r22,lo8(-(-1))
+ 461 0154 7040      		sbci r23,hi8(-(-1))
+ 462               	.L29:
+ 463               	.LSM60:
+ 464 0156 6115      		cp r22,__zero_reg__
+ 465 0158 7105      		cpc r23,__zero_reg__
+ 466 015a 01F4      		brne .L30
+ 467 015c 00C0      		rjmp .L31
+ 468               	.LVL18:
+ 469               	.L43:
+ 470               	.LSM61:
+ 471 015e C801      		movw r24,r16
+ 472 0160 B701      		movw r22,r14
+ 473 0162 0E94 0000 		call __fixunssfsi
+ 474               	.LVL19:
+ 475               	.L26:
+ 476               	.LBB66:
+ 477               	.LBB67:
+ 478               	.LSM62:
+ 479 0166 CB01      		movw r24,r22
+ 480               	.LVL20:
+ 481               	/* #APP */
+ 482               	 ;  105 "/usr/local/CrossPack-AVR-20100115/lib/gcc/avr/4.3.3/../../../../avr/include/util/delay_bas
+ 483 0168 0197      		1: sbiw r24,1
+ 484 016a 01F4      		brne 1b
+ 485               	 ;  0 "" 2
+ 486               	.LVL21:
+ 487               	/* #NOAPP */
+ 488               	.L31:
+ 489               	.LBE67:
+ 490               	.LBE66:
+ 491               	.LBE63:
+ 492               	.LBE62:
+ 493               	.LSM63:
+ 494 016c 2196      		adiw r28,1
+ 495               	.LVL22:
+ 496 016e C436      		cpi r28,100
+ 497 0170 D105      		cpc r29,__zero_reg__
+ 498 0172 01F0      		breq .+2
+ 499 0174 00C0      		rjmp .L32
+ 500               	.LSM64:
+ 501 0176 0E94 0000 		call SetupHardware
+ 502               	.LVL23:
+ 503               	.LBB68:
+ 504               	.LBB69:
+ 505               	.LSM65:
+ 506 017a 769A      		sbi 46-32,6
+ 507               	.LBE69:
+ 508               	.LBE68:
+ 509               	.LSM66:
+ 510               	/* #APP */
+ 511               	 ;  113 "MassStorage.c" 1
+ 512 017c 7894      		sei
+ 513               	 ;  0 "" 2
+ 514               	/* #NOAPP */
+ 515               	.L33:
+ 516               	.LSM67:
+ 517 017e 80E0      		ldi r24,lo8(Disk_MS_Interface)
+ 518 0180 90E0      		ldi r25,hi8(Disk_MS_Interface)
+ 519 0182 0E94 0000 		call MS_Device_USBTask
+ 520               	.LSM68:
+ 521 0186 0E94 0000 		call USB_USBTask
+ 522 018a 00C0      		rjmp .L33
+ 523               	.LFE120:
+ 525               	.global	Disk_MS_Interface
+ 526               		.data
+ 529               	Disk_MS_Interface:
+ 530 0000 00        		.byte	0
+ 531 0001 03        		.byte	3
+ 532 0002 4000      		.word	64
+ 533 0004 00        		.byte	0
+ 534 0005 04        		.byte	4
+ 535 0006 4000      		.word	64
+ 536 0008 00        		.byte	0
+ 537 0009 01        		.byte	1
+ 538 000a 0000 0000 		.skip 45,0
+ 538      0000 0000 
+ 538      0000 0000 
+ 538      0000 0000 
+ 538      0000 0000 
+ 539               		.comm morse_code_table,1,1
+ 612               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 MassStorage.c
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:2      *ABS*:0000003f __SREG__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:3      *ABS*:0000003e __SP_H__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:4      *ABS*:0000003d __SP_L__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:5      *ABS*:00000034 __CCP__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:19     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:38     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:57     .text.CALLBACK_MS_Device_SCSICommandReceived:00000000 CALLBACK_MS_Device_SCSICommandReceived
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:86     .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:529    .data:00000000 Disk_MS_Interface
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:103    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:137    .text.SetupHardware:00000000 SetupHardware
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccyNAQKS.s:218    .text.main:00000000 main
+                            *COM*:00000001 morse_code_table
+
+UNDEFINED SYMBOLS
+SCSI_DecodeSCSICommand
+MS_Device_ProcessControlRequest
+MS_Device_ConfigureEndpoints
+USB_Init
+DataflashManager_ResetDataflashProtections
+__floatsisf
+__mulsf3
+__addsf3
+__ltsf2
+__gtsf2
+__fixunssfsi
+MS_Device_USBTask
+USB_USBTask
+__do_copy_data
+__do_clear_bss

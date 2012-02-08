@@ -1,0 +1,840 @@
+   1               		.file	"TempDataLogger.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.CALLBACK_HID_Device_ProcessHIDReport,"ax",@progbits
+  17               	.global	CALLBACK_HID_Device_ProcessHIDReport
+  19               	CALLBACK_HID_Device_ProcessHIDReport:
+  20               	.LFB144:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 0F93      		push r16
+  24               	.LVL1:
+  25 0002 1F93      		push r17
+  26               	/* prologue: function */
+  27               	/* frame size = 0 */
+  28               	.LSM1:
+  29 0004 8901      		movw r16,r18
+  30               	.LVL2:
+  31               	.LSM2:
+  32 0006 C901      		movw r24,r18
+  33               	.LVL3:
+  34 0008 0E94 0000 		call DS1307_SetTimeDate
+  35               	.LVL4:
+  36               	.LSM3:
+  37 000c F801      		movw r30,r16
+  38               	.LVL5:
+  39 000e 6681      		ldd r22,Z+6
+  40 0010 8091 0000 		lds r24,LoggingInterval500MS_SRAM
+  41 0014 8617      		cp r24,r22
+  42 0016 01F0      		breq .L3
+  43               	.LSM4:
+  44 0018 6093 0000 		sts LoggingInterval500MS_SRAM,r22
+  45               	.LSM5:
+  46 001c 80E0      		ldi r24,lo8(LoggingInterval500MS_EEPROM)
+  47 001e 90E0      		ldi r25,hi8(LoggingInterval500MS_EEPROM)
+  48 0020 0E94 0000 		call __eeupd_byte_m32u4
+  49               	.L3:
+  50               	/* epilogue start */
+  51               	.LSM6:
+  52 0024 1F91      		pop r17
+  53 0026 0F91      		pop r16
+  54               	.LVL6:
+  55 0028 0895      		ret
+  56               	.LFE144:
+  58               		.section	.text.CALLBACK_HID_Device_CreateHIDReport,"ax",@progbits
+  59               	.global	CALLBACK_HID_Device_CreateHIDReport
+  61               	CALLBACK_HID_Device_CreateHIDReport:
+  62               	.LFB143:
+  63               	.LSM7:
+  64               	.LVL7:
+  65 0000 EF92      		push r14
+  66 0002 FF92      		push r15
+  67 0004 0F93      		push r16
+  68               	.LVL8:
+  69 0006 1F93      		push r17
+  70               	/* prologue: function */
+  71               	/* frame size = 0 */
+  72 0008 7801      		movw r14,r16
+  73               	.LVL9:
+  74               	.LSM8:
+  75 000a 8901      		movw r16,r18
+  76               	.LVL10:
+  77               	.LSM9:
+  78 000c C901      		movw r24,r18
+  79               	.LVL11:
+  80 000e 0E94 0000 		call DS1307_GetTimeDate
+  81               	.LVL12:
+  82               	.LSM10:
+  83 0012 8091 0000 		lds r24,LoggingInterval500MS_SRAM
+  84 0016 F801      		movw r30,r16
+  85               	.LVL13:
+  86 0018 8683      		std Z+6,r24
+  87               	.LSM11:
+  88 001a 87E0      		ldi r24,lo8(7)
+  89 001c 90E0      		ldi r25,hi8(7)
+  90 001e F701      		movw r30,r14
+  91 0020 9183      		std Z+1,r25
+  92 0022 8083      		st Z,r24
+  93               	.LSM12:
+  94 0024 81E0      		ldi r24,lo8(1)
+  95               	/* epilogue start */
+  96 0026 1F91      		pop r17
+  97 0028 0F91      		pop r16
+  98               	.LVL14:
+  99 002a FF90      		pop r15
+ 100 002c EF90      		pop r14
+ 101               	.LVL15:
+ 102 002e 0895      		ret
+ 103               	.LFE143:
+ 105               		.section	.text.CALLBACK_MS_Device_SCSICommandReceived,"ax",@progbits
+ 106               	.global	CALLBACK_MS_Device_SCSICommandReceived
+ 108               	CALLBACK_MS_Device_SCSICommandReceived:
+ 109               	.LFB142:
+ 110               	.LSM13:
+ 111               	.LVL16:
+ 112               	/* prologue: function */
+ 113               	/* frame size = 0 */
+ 114               	.LBB38:
+ 115               	.LBB39:
+ 116               	.LSM14:
+ 117 0000 7698      		cbi 46-32,6
+ 118               	.LBE39:
+ 119               	.LBE38:
+ 120               	.LSM15:
+ 121 0002 0E94 0000 		call SCSI_DecodeSCSICommand
+ 122               	.LVL17:
+ 123               	.LBB40:
+ 124               	.LBB41:
+ 125               	.LSM16:
+ 126 0006 7698      		cbi 46-32,6
+ 127               	/* epilogue start */
+ 128               	.LBE41:
+ 129               	.LBE40:
+ 130               	.LSM17:
+ 131 0008 0895      		ret
+ 132               	.LFE142:
+ 134               		.section	.text.EVENT_USB_Device_ControlRequest,"ax",@progbits
+ 135               	.global	EVENT_USB_Device_ControlRequest
+ 137               	EVENT_USB_Device_ControlRequest:
+ 138               	.LFB141:
+ 139               	.LSM18:
+ 140               	/* prologue: function */
+ 141               	/* frame size = 0 */
+ 142               	.LSM19:
+ 143 0000 80E0      		ldi r24,lo8(Disk_MS_Interface)
+ 144 0002 90E0      		ldi r25,hi8(Disk_MS_Interface)
+ 145 0004 0E94 0000 		call MS_Device_ProcessControlRequest
+ 146               	.LSM20:
+ 147 0008 80E0      		ldi r24,lo8(Generic_HID_Interface)
+ 148 000a 90E0      		ldi r25,hi8(Generic_HID_Interface)
+ 149 000c 0E94 0000 		call HID_Device_ProcessControlRequest
+ 150               	/* epilogue start */
+ 151               	.LSM21:
+ 152 0010 0895      		ret
+ 153               	.LFE141:
+ 155               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 156               	.global	EVENT_USB_Device_ConfigurationChanged
+ 158               	EVENT_USB_Device_ConfigurationChanged:
+ 159               	.LFB140:
+ 160               	.LSM22:
+ 161 0000 0F93      		push r16
+ 162 0002 1F93      		push r17
+ 163               	/* prologue: function */
+ 164               	/* frame size = 0 */
+ 165               	.LSM23:
+ 166 0004 80E0      		ldi r24,lo8(Generic_HID_Interface)
+ 167 0006 90E0      		ldi r25,hi8(Generic_HID_Interface)
+ 168 0008 0E94 0000 		call HID_Device_ConfigureEndpoints
+ 169 000c 082F      		mov r16,r24
+ 170               	.LSM24:
+ 171 000e 80E0      		ldi r24,lo8(Disk_MS_Interface)
+ 172 0010 90E0      		ldi r25,hi8(Disk_MS_Interface)
+ 173 0012 0E94 0000 		call MS_Device_ConfigureEndpoints
+ 174               	.LSM25:
+ 175 0016 10E0      		ldi r17,lo8(0)
+ 176 0018 90E0      		ldi r25,lo8(0)
+ 177 001a 0823      		and r16,r24
+ 178 001c 1923      		and r17,r25
+ 179 001e 00FF      		sbrs r16,0
+ 180 0020 00C0      		rjmp .L11
+ 181 0022 90E0      		ldi r25,lo8(0)
+ 182 0024 00C0      		rjmp .L12
+ 183               	.L11:
+ 184 0026 90E4      		ldi r25,lo8(64)
+ 185               	.L12:
+ 186               	.LBB42:
+ 187               	.LBB43:
+ 188               	.LSM26:
+ 189 0028 8EB1      		in r24,46-32
+ 190 002a 8F7B      		andi r24,lo8(-65)
+ 191 002c 982B      		or r25,r24
+ 192 002e 9EB9      		out 46-32,r25
+ 193               	/* epilogue start */
+ 194               	.LBE43:
+ 195               	.LBE42:
+ 196               	.LSM27:
+ 197 0030 1F91      		pop r17
+ 198 0032 0F91      		pop r16
+ 199 0034 0895      		ret
+ 200               	.LFE140:
+ 202               		.section	.text.SetupHardware,"ax",@progbits
+ 203               	.global	SetupHardware
+ 205               	SetupHardware:
+ 206               	.LFB137:
+ 207               	.LSM28:
+ 208               	/* prologue: function */
+ 209               	/* frame size = 0 */
+ 210               	.LSM29:
+ 211 0000 84B7      		in r24,84-32
+ 212 0002 877F      		andi r24,lo8(-9)
+ 213 0004 84BF      		out 84-32,r24
+ 214               	.LSM30:
+ 215 0006 88E1      		ldi r24,lo8(24)
+ 216               	/* #APP */
+ 217               	 ;  212 "TempDataLogger.c" 1
+ 218 0008 0FB6      		in __tmp_reg__, __SREG__
+ 219 000a F894      		cli
+ 220 000c 8093 6000 		sts 96, r24
+ 221 0010 1092 6000 		sts 96, __zero_reg__
+ 222 0014 0FBE      		out __SREG__,__tmp_reg__
+ 223               		
+ 224               	 ;  0 "" 2
+ 225               	/* #NOAPP */
+ 226               	.LBB44:
+ 227               	.LSM31:
+ 228 0016 80E0      		ldi r24,lo8(0)
+ 229 0018 90E0      		ldi r25,hi8(0)
+ 230 001a 20E8      		ldi r18,lo8(-128)
+ 231               	/* #APP */
+ 232               	 ;  215 "TempDataLogger.c" 1
+ 233 001c 0FB6      		in __tmp_reg__,__SREG__
+ 234 001e F894      		cli
+ 235 0020 2093 6100 		sts 97, r18
+ 236 0024 8093 6100 		sts 97, r24
+ 237 0028 0FBE      		out __SREG__, __tmp_reg__
+ 238               	 ;  0 "" 2
+ 239               	/* #NOAPP */
+ 240               	.LBE44:
+ 241               	.LBB45:
+ 242               	.LBB46:
+ 243               	.LSM32:
+ 244 002a 6E9A      		sbi 45-32,6
+ 245               	.LSM33:
+ 246 002c 7698      		cbi 46-32,6
+ 247               	.LBE46:
+ 248               	.LBE45:
+ 249               	.LBB47:
+ 250               	.LBB48:
+ 251               	.LSM34:
+ 252 002e 209A      		sbi 36-32,0
+ 253               	.LSM35:
+ 254 0030 289A      		sbi 37-32,0
+ 255               	.LSM36:
+ 256 0032 84B1      		in r24,36-32
+ 257 0034 8660      		ori r24,lo8(6)
+ 258 0036 84B9      		out 36-32,r24
+ 259               	.LSM37:
+ 260 0038 2398      		cbi 36-32,3
+ 261               	.LSM38:
+ 262 003a 2B9A      		sbi 37-32,3
+ 263               	.LSM39:
+ 264 003c 8DB5      		in r24,77-32
+ 265 003e 8160      		ori r24,lo8(1)
+ 266 0040 8DBD      		out 77-32,r24
+ 267               	.LSM40:
+ 268 0042 2098      		cbi 36-32,0
+ 269               	.LSM41:
+ 270 0044 8CE5      		ldi r24,lo8(92)
+ 271 0046 8CBD      		out 76-32,r24
+ 272               	.LBE48:
+ 273               	.LBE47:
+ 274               	.LBB49:
+ 275               	.LBB50:
+ 276               	.LSM42:
+ 277 0048 87EA      		ldi r24,lo8(-89)
+ 278 004a 8093 7A00 		sts 122,r24
+ 279               	.LBE50:
+ 280               	.LBE49:
+ 281               	.LBB51:
+ 282               	.LBB52:
+ 283               	.LBB53:
+ 284               	.LBB54:
+ 285               	.LSM43:
+ 286 004e 8098      		cbi 48-32,0
+ 287               	.LSM44:
+ 288 0050 EEE7      		ldi r30,lo8(126)
+ 289 0052 F0E0      		ldi r31,hi8(126)
+ 290 0054 8081      		ld r24,Z
+ 291 0056 8160      		ori r24,lo8(1)
+ 292 0058 8083      		st Z,r24
+ 293               	.LBE54:
+ 294               	.LBE53:
+ 295               	.LBE52:
+ 296               	.LBE51:
+ 297               	.LSM45:
+ 298 005a 0E94 0000 		call USB_Init
+ 299               	.LBB55:
+ 300               	.LBB56:
+ 301               	.LSM46:
+ 302 005e ECEB      		ldi r30,lo8(188)
+ 303 0060 F0E0      		ldi r31,hi8(188)
+ 304 0062 8081      		ld r24,Z
+ 305 0064 8460      		ori r24,lo8(4)
+ 306 0066 8083      		st Z,r24
+ 307               	.LSM47:
+ 308 0068 81E0      		ldi r24,lo8(1)
+ 309 006a 8093 B900 		sts 185,r24
+ 310               	.LSM48:
+ 311 006e 80E2      		ldi r24,lo8(32)
+ 312 0070 8093 B800 		sts 184,r24
+ 313               	.LBE56:
+ 314               	.LBE55:
+ 315               	.LSM49:
+ 316 0074 83E8      		ldi r24,lo8(7811)
+ 317 0076 9EE1      		ldi r25,hi8(7811)
+ 318 0078 9093 8900 		sts (136)+1,r25
+ 319 007c 8093 8800 		sts 136,r24
+ 320               	.LSM50:
+ 321 0080 8DE0      		ldi r24,lo8(13)
+ 322 0082 8093 8100 		sts 129,r24
+ 323               	.LSM51:
+ 324 0086 82E0      		ldi r24,lo8(2)
+ 325 0088 8093 6F00 		sts 111,r24
+ 326               	.LSM52:
+ 327 008c 0E94 0000 		call DataflashManager_ResetDataflashProtections
+ 328               	/* epilogue start */
+ 329               	.LSM53:
+ 330 0090 0895      		ret
+ 331               	.LFE137:
+ 333               		.section	.text.CloseLogFile,"ax",@progbits
+ 334               	.global	CloseLogFile
+ 336               	CloseLogFile:
+ 337               	.LFB136:
+ 338               	.LSM54:
+ 339 0000 0F93      		push r16
+ 340 0002 1F93      		push r17
+ 341               	/* prologue: function */
+ 342               	/* frame size = 0 */
+ 343               	.LSM55:
+ 344 0004 00E0      		ldi r16,lo8(TempLogFile)
+ 345 0006 10E0      		ldi r17,hi8(TempLogFile)
+ 346 0008 C801      		movw r24,r16
+ 347 000a 0E94 0000 		call f_sync
+ 348               	.LSM56:
+ 349 000e C801      		movw r24,r16
+ 350 0010 0E94 0000 		call f_close
+ 351               	/* epilogue start */
+ 352               	.LSM57:
+ 353 0014 1F91      		pop r17
+ 354 0016 0F91      		pop r16
+ 355 0018 0895      		ret
+ 356               	.LFE136:
+ 358               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+ 359               	.global	EVENT_USB_Device_Connect
+ 361               	EVENT_USB_Device_Connect:
+ 362               	.LFB138:
+ 363               	.LSM58:
+ 364               	/* prologue: function */
+ 365               	/* frame size = 0 */
+ 366               	.LBB57:
+ 367               	.LBB58:
+ 368               	.LSM59:
+ 369 0000 7698      		cbi 46-32,6
+ 370               	.LBE58:
+ 371               	.LBE57:
+ 372               	.LSM60:
+ 373 0002 0E94 0000 		call CloseLogFile
+ 374               	/* epilogue start */
+ 375               	.LSM61:
+ 376 0006 0895      		ret
+ 377               	.LFE138:
+ 379               		.data
+ 380               	.LC0:
+ 381 0000 2530 3264 		.string	"%02d%02d%02d.csv"
+ 381      2530 3264 
+ 381      2530 3264 
+ 381      2E63 7376 
+ 381      00
+ 382               		.section	.text.OpenLogFile,"ax",@progbits
+ 383               	.global	OpenLogFile
+ 385               	OpenLogFile:
+ 386               	.LFB135:
+ 387               	.LSM62:
+ 388 0000 EF92      		push r14
+ 389 0002 FF92      		push r15
+ 390 0004 0F93      		push r16
+ 391 0006 1F93      		push r17
+ 392 0008 DF93      		push r29
+ 393 000a CF93      		push r28
+ 394 000c CDB7      		in r28,__SP_L__
+ 395 000e DEB7      		in r29,__SP_H__
+ 396 0010 6297      		sbiw r28,18
+ 397 0012 0FB6      		in __tmp_reg__,__SREG__
+ 398 0014 F894      		cli
+ 399 0016 DEBF      		out __SP_H__,r29
+ 400 0018 0FBE      		out __SREG__,__tmp_reg__
+ 401 001a CDBF      		out __SP_L__,r28
+ 402               	/* prologue: function */
+ 403               	/* frame size = 18 */
+ 404               	.LSM63:
+ 405 001c CE01      		movw r24,r28
+ 406 001e 0196      		adiw r24,1
+ 407 0020 0E94 0000 		call DS1307_GetTimeDate
+ 408               	.LSM64:
+ 409 0024 8DB7      		in r24,__SP_L__
+ 410 0026 9EB7      		in r25,__SP_H__
+ 411 0028 0A97      		sbiw r24,10
+ 412 002a 0FB6      		in __tmp_reg__,__SREG__
+ 413 002c F894      		cli
+ 414 002e 9EBF      		out __SP_H__,r25
+ 415 0030 0FBE      		out __SREG__,__tmp_reg__
+ 416 0032 8DBF      		out __SP_L__,r24
+ 417 0034 EDB7      		in r30,__SP_L__
+ 418 0036 FEB7      		in r31,__SP_H__
+ 419 0038 3196      		adiw r30,1
+ 420 003a 87E0      		ldi r24,lo8(7)
+ 421 003c E82E      		mov r14,r24
+ 422 003e F12C      		mov r15,__zero_reg__
+ 423 0040 EC0E      		add r14,r28
+ 424 0042 FD1E      		adc r15,r29
+ 425 0044 ADB7      		in r26,__SP_L__
+ 426 0046 BEB7      		in r27,__SP_H__
+ 427 0048 1296      		adiw r26,1+1
+ 428 004a FC92      		st X,r15
+ 429 004c EE92      		st -X,r14
+ 430 004e 1197      		sbiw r26,1
+ 431 0050 80E0      		ldi r24,lo8(.LC0)
+ 432 0052 90E0      		ldi r25,hi8(.LC0)
+ 433 0054 9383      		std Z+3,r25
+ 434 0056 8283      		std Z+2,r24
+ 435 0058 8C81      		ldd r24,Y+4
+ 436 005a 8483      		std Z+4,r24
+ 437 005c 1582      		std Z+5,__zero_reg__
+ 438 005e 8D81      		ldd r24,Y+5
+ 439 0060 8683      		std Z+6,r24
+ 440 0062 1782      		std Z+7,__zero_reg__
+ 441 0064 8E81      		ldd r24,Y+6
+ 442 0066 8087      		std Z+8,r24
+ 443 0068 1186      		std Z+9,__zero_reg__
+ 444 006a 0E94 0000 		call sprintf
+ 445               	.LSM65:
+ 446 006e 8DB7      		in r24,__SP_L__
+ 447 0070 9EB7      		in r25,__SP_H__
+ 448 0072 0A96      		adiw r24,10
+ 449 0074 0FB6      		in __tmp_reg__,__SREG__
+ 450 0076 F894      		cli
+ 451 0078 9EBF      		out __SP_H__,r25
+ 452 007a 0FBE      		out __SREG__,__tmp_reg__
+ 453 007c 8DBF      		out __SP_L__,r24
+ 454 007e 80E0      		ldi r24,lo8(0)
+ 455 0080 60E0      		ldi r22,lo8(DiskFATState)
+ 456 0082 70E0      		ldi r23,hi8(DiskFATState)
+ 457 0084 0E94 0000 		call f_mount
+ 458               	.LSM66:
+ 459 0088 00E0      		ldi r16,lo8(TempLogFile)
+ 460 008a 10E0      		ldi r17,hi8(TempLogFile)
+ 461 008c C801      		movw r24,r16
+ 462 008e B701      		movw r22,r14
+ 463 0090 42E1      		ldi r20,lo8(18)
+ 464 0092 0E94 0000 		call f_open
+ 465               	.LSM67:
+ 466 0096 4091 0000 		lds r20,TempLogFile+10
+ 467 009a 5091 0000 		lds r21,(TempLogFile+10)+1
+ 468 009e 6091 0000 		lds r22,(TempLogFile+10)+2
+ 469 00a2 7091 0000 		lds r23,(TempLogFile+10)+3
+ 470 00a6 C801      		movw r24,r16
+ 471 00a8 0E94 0000 		call f_lseek
+ 472               	/* epilogue start */
+ 473               	.LSM68:
+ 474 00ac 6296      		adiw r28,18
+ 475 00ae 0FB6      		in __tmp_reg__,__SREG__
+ 476 00b0 F894      		cli
+ 477 00b2 DEBF      		out __SP_H__,r29
+ 478 00b4 0FBE      		out __SREG__,__tmp_reg__
+ 479 00b6 CDBF      		out __SP_L__,r28
+ 480 00b8 CF91      		pop r28
+ 481 00ba DF91      		pop r29
+ 482 00bc 1F91      		pop r17
+ 483 00be 0F91      		pop r16
+ 484 00c0 FF90      		pop r15
+ 485 00c2 EF90      		pop r14
+ 486 00c4 0895      		ret
+ 487               	.LFE135:
+ 489               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+ 490               	.global	EVENT_USB_Device_Disconnect
+ 492               	EVENT_USB_Device_Disconnect:
+ 493               	.LFB139:
+ 494               	.LSM69:
+ 495               	/* prologue: function */
+ 496               	/* frame size = 0 */
+ 497               	.LBB59:
+ 498               	.LBB60:
+ 499               	.LSM70:
+ 500 0000 769A      		sbi 46-32,6
+ 501               	.LBE60:
+ 502               	.LBE59:
+ 503               	.LSM71:
+ 504 0002 0E94 0000 		call OpenLogFile
+ 505               	/* epilogue start */
+ 506               	.LSM72:
+ 507 0006 0895      		ret
+ 508               	.LFE139:
+ 510               		.section	.text.main,"ax",@progbits
+ 511               	.global	main
+ 513               	main:
+ 514               	.LFB134:
+ 515               	.LSM73:
+ 516               	/* prologue: function */
+ 517               	/* frame size = 0 */
+ 518               	.LSM74:
+ 519 0000 0E94 0000 		call SetupHardware
+ 520               	.LSM75:
+ 521 0004 80E0      		ldi r24,lo8(LoggingInterval500MS_EEPROM)
+ 522 0006 90E0      		ldi r25,hi8(LoggingInterval500MS_EEPROM)
+ 523 0008 0E94 0000 		call __eerd_byte_m32u4
+ 524 000c 8093 0000 		sts LoggingInterval500MS_SRAM,r24
+ 525               	.LSM76:
+ 526 0010 8F3F      		cpi r24,lo8(-1)
+ 527 0012 01F4      		brne .L25
+ 528               	.LSM77:
+ 529 0014 8AE0      		ldi r24,lo8(10)
+ 530 0016 8093 0000 		sts LoggingInterval500MS_SRAM,r24
+ 531               	.L25:
+ 532               	.LSM78:
+ 533 001a 0E94 0000 		call OpenLogFile
+ 534               	.LBB61:
+ 535               	.LBB62:
+ 536               	.LSM79:
+ 537 001e 769A      		sbi 46-32,6
+ 538               	.LBE62:
+ 539               	.LBE61:
+ 540               	.LSM80:
+ 541               	/* #APP */
+ 542               	 ;  171 "TempDataLogger.c" 1
+ 543 0020 7894      		sei
+ 544               	 ;  0 "" 2
+ 545               	/* #NOAPP */
+ 546               	.L26:
+ 547               	.LSM81:
+ 548 0022 5E9A      		sbi 43-32,6
+ 549               	.LSM82:
+ 550 0024 80E0      		ldi r24,lo8(Disk_MS_Interface)
+ 551 0026 90E0      		ldi r25,hi8(Disk_MS_Interface)
+ 552 0028 0E94 0000 		call MS_Device_USBTask
+ 553               	.LSM83:
+ 554 002c 80E0      		ldi r24,lo8(Generic_HID_Interface)
+ 555 002e 90E0      		ldi r25,hi8(Generic_HID_Interface)
+ 556 0030 0E94 0000 		call HID_Device_USBTask
+ 557               	.LSM84:
+ 558 0034 5E98      		cbi 43-32,6
+ 559               	.LSM85:
+ 560 0036 0E94 0000 		call USB_USBTask
+ 561 003a 00C0      		rjmp .L26
+ 562               	.LFE134:
+ 564               		.data
+ 565               	.LC1:
+ 566 0011 2530 3264 		.string	"%02d/%02d/20%02d, %02d:%02d:%02d, %d Degrees\r\n"
+ 566      2F25 3032 
+ 566      642F 3230 
+ 566      2530 3264 
+ 566      2C20 2530 
+ 567               		.section	.text.__vector_17,"ax",@progbits
+ 568               	.global	__vector_17
+ 570               	__vector_17:
+ 571               	.LFB133:
+ 572               	.LSM86:
+ 573 0000 1F92      		push __zero_reg__
+ 574 0002 0F92      		push r0
+ 575 0004 0FB6      		in r0,__SREG__
+ 576 0006 0F92      		push r0
+ 577 0008 1124      		clr __zero_reg__
+ 578 000a 8F92      		push r8
+ 579 000c 9F92      		push r9
+ 580 000e AF92      		push r10
+ 581 0010 BF92      		push r11
+ 582 0012 CF92      		push r12
+ 583 0014 DF92      		push r13
+ 584 0016 EF92      		push r14
+ 585 0018 FF92      		push r15
+ 586 001a 0F93      		push r16
+ 587 001c 2F93      		push r18
+ 588 001e 3F93      		push r19
+ 589 0020 4F93      		push r20
+ 590 0022 5F93      		push r21
+ 591 0024 6F93      		push r22
+ 592 0026 7F93      		push r23
+ 593 0028 8F93      		push r24
+ 594 002a 9F93      		push r25
+ 595 002c AF93      		push r26
+ 596 002e BF93      		push r27
+ 597 0030 EF93      		push r30
+ 598 0032 FF93      		push r31
+ 599 0034 DF93      		push r29
+ 600 0036 CF93      		push r28
+ 601 0038 CDB7      		in r28,__SP_L__
+ 602 003a DEB7      		in r29,__SP_H__
+ 603 003c CC56      		subi r28,lo8(-(-108))
+ 604 003e D040      		sbci r29,hi8(-(-108))
+ 605 0040 DEBF      		out __SP_H__,r29
+ 606 0042 CDBF      		out __SP_L__,r28
+ 607               	/* prologue: Signal */
+ 608               	/* frame size = 108 */
+ 609               	.LBB63:
+ 610               	.LBB64:
+ 611               	.LSM87:
+ 612 0044 0EB1      		in r16,46-32
+ 613               	.LBE64:
+ 614               	.LBE63:
+ 615               	.LSM88:
+ 616 0046 2091 0000 		lds r18,CurrentLoggingTicks
+ 617 004a 3091 0000 		lds r19,(CurrentLoggingTicks)+1
+ 618 004e 2F5F      		subi r18,lo8(-(1))
+ 619 0050 3F4F      		sbci r19,hi8(-(1))
+ 620 0052 3093 0000 		sts (CurrentLoggingTicks)+1,r19
+ 621 0056 2093 0000 		sts CurrentLoggingTicks,r18
+ 622 005a 8091 0000 		lds r24,LoggingInterval500MS_SRAM
+ 623 005e 90E0      		ldi r25,lo8(0)
+ 624 0060 2817      		cp r18,r24
+ 625 0062 3907      		cpc r19,r25
+ 626 0064 00F4      		brsh .+2
+ 627 0066 00C0      		rjmp .L31
+ 628               	.LSM89:
+ 629 0068 1092 0000 		sts (CurrentLoggingTicks)+1,__zero_reg__
+ 630 006c 1092 0000 		sts CurrentLoggingTicks,__zero_reg__
+ 631               	.LBB65:
+ 632               	.LBB66:
+ 633               	.LSM90:
+ 634 0070 7698      		cbi 46-32,6
+ 635               	.LBE66:
+ 636               	.LBE65:
+ 637               	.LSM91:
+ 638 0072 8EB3      		in r24,62-32
+ 639 0074 8823      		tst r24
+ 640 0076 01F0      		breq .+2
+ 641 0078 00C0      		rjmp .L30
+ 642               	.LBB67:
+ 643               	.LSM92:
+ 644 007a CE01      		movw r24,r28
+ 645 007c 0396      		adiw r24,3
+ 646 007e 0E94 0000 		call DS1307_GetTimeDate
+ 647               	.LSM93:
+ 648 0082 FE80      		ldd r15,Y+6
+ 649 0084 EF80      		ldd r14,Y+7
+ 650 0086 D884      		ldd r13,Y+8
+ 651 0088 CB80      		ldd r12,Y+3
+ 652 008a BC80      		ldd r11,Y+4
+ 653 008c AD80      		ldd r10,Y+5
+ 654 008e 0E94 0000 		call Temperature_GetTemperature
+ 655 0092 2DB7      		in r18,__SP_L__
+ 656 0094 3EB7      		in r19,__SP_H__
+ 657 0096 2251      		subi r18,lo8(-(-18))
+ 658 0098 3040      		sbci r19,hi8(-(-18))
+ 659 009a 0FB6      		in __tmp_reg__,__SREG__
+ 660 009c F894      		cli
+ 661 009e 3EBF      		out __SP_H__,r19
+ 662 00a0 0FBE      		out __SREG__,__tmp_reg__
+ 663 00a2 2DBF      		out __SP_L__,r18
+ 664 00a4 EDB7      		in r30,__SP_L__
+ 665 00a6 FEB7      		in r31,__SP_H__
+ 666 00a8 3196      		adiw r30,1
+ 667 00aa 99E0      		ldi r25,lo8(9)
+ 668 00ac 892E      		mov r8,r25
+ 669 00ae 912C      		mov r9,__zero_reg__
+ 670 00b0 8C0E      		add r8,r28
+ 671 00b2 9D1E      		adc r9,r29
+ 672 00b4 ADB7      		in r26,__SP_L__
+ 673 00b6 BEB7      		in r27,__SP_H__
+ 674 00b8 1296      		adiw r26,1+1
+ 675 00ba 9C92      		st X,r9
+ 676 00bc 8E92      		st -X,r8
+ 677 00be 1197      		sbiw r26,1
+ 678 00c0 20E0      		ldi r18,lo8(.LC1)
+ 679 00c2 30E0      		ldi r19,hi8(.LC1)
+ 680 00c4 3383      		std Z+3,r19
+ 681 00c6 2283      		std Z+2,r18
+ 682 00c8 F482      		std Z+4,r15
+ 683 00ca 1582      		std Z+5,__zero_reg__
+ 684 00cc E682      		std Z+6,r14
+ 685 00ce 1782      		std Z+7,__zero_reg__
+ 686 00d0 D086      		std Z+8,r13
+ 687 00d2 1186      		std Z+9,__zero_reg__
+ 688 00d4 C286      		std Z+10,r12
+ 689 00d6 1386      		std Z+11,__zero_reg__
+ 690 00d8 B486      		std Z+12,r11
+ 691 00da 1586      		std Z+13,__zero_reg__
+ 692 00dc A686      		std Z+14,r10
+ 693 00de 1786      		std Z+15,__zero_reg__
+ 694 00e0 9927      		clr r25
+ 695 00e2 87FD      		sbrc r24,7
+ 696 00e4 9095      		com r25
+ 697 00e6 918B      		std Z+17,r25
+ 698 00e8 808B      		std Z+16,r24
+ 699 00ea 0E94 0000 		call sprintf
+ 700 00ee AC01      		movw r20,r24
+ 701 00f0 8983      		std Y+1,r24
+ 702               	.LVL18:
+ 703 00f2 5A83      		std Y+2,r21
+ 704               	.LVL19:
+ 705               	.LSM94:
+ 706 00f4 2DB7      		in r18,__SP_L__
+ 707 00f6 3EB7      		in r19,__SP_H__
+ 708 00f8 2E5E      		subi r18,lo8(-(18))
+ 709 00fa 3F4F      		sbci r19,hi8(-(18))
+ 710 00fc 0FB6      		in __tmp_reg__,__SREG__
+ 711 00fe F894      		cli
+ 712 0100 3EBF      		out __SP_H__,r19
+ 713 0102 0FBE      		out __SREG__,__tmp_reg__
+ 714 0104 2DBF      		out __SP_L__,r18
+ 715 0106 80E0      		ldi r24,lo8(TempLogFile)
+ 716 0108 90E0      		ldi r25,hi8(TempLogFile)
+ 717 010a B401      		movw r22,r8
+ 718 010c 9E01      		movw r18,r28
+ 719 010e 2F5F      		subi r18,lo8(-(1))
+ 720 0110 3F4F      		sbci r19,hi8(-(1))
+ 721 0112 0E94 0000 		call f_write
+ 722               	.LSM95:
+ 723 0116 80E0      		ldi r24,lo8(TempLogFile)
+ 724 0118 90E0      		ldi r25,hi8(TempLogFile)
+ 725 011a 0E94 0000 		call f_sync
+ 726               	.L30:
+ 727               	.LBE67:
+ 728               	.LBB68:
+ 729               	.LBB69:
+ 730               	.LSM96:
+ 731 011e 8EB1      		in r24,46-32
+ 732 0120 0074      		andi r16,lo8(64)
+ 733 0122 8F7B      		andi r24,lo8(-65)
+ 734 0124 082B      		or r16,r24
+ 735 0126 0EB9      		out 46-32,r16
+ 736               	.L31:
+ 737               	/* epilogue start */
+ 738               	.LBE69:
+ 739               	.LBE68:
+ 740               	.LSM97:
+ 741 0128 C459      		subi r28,lo8(-(108))
+ 742 012a DF4F      		sbci r29,hi8(-(108))
+ 743 012c DEBF      		out __SP_H__,r29
+ 744 012e CDBF      		out __SP_L__,r28
+ 745 0130 CF91      		pop r28
+ 746 0132 DF91      		pop r29
+ 747 0134 FF91      		pop r31
+ 748 0136 EF91      		pop r30
+ 749 0138 BF91      		pop r27
+ 750 013a AF91      		pop r26
+ 751 013c 9F91      		pop r25
+ 752 013e 8F91      		pop r24
+ 753 0140 7F91      		pop r23
+ 754 0142 6F91      		pop r22
+ 755 0144 5F91      		pop r21
+ 756 0146 4F91      		pop r20
+ 757 0148 3F91      		pop r19
+ 758 014a 2F91      		pop r18
+ 759 014c 0F91      		pop r16
+ 760 014e FF90      		pop r15
+ 761 0150 EF90      		pop r14
+ 762 0152 DF90      		pop r13
+ 763 0154 CF90      		pop r12
+ 764 0156 BF90      		pop r11
+ 765 0158 AF90      		pop r10
+ 766 015a 9F90      		pop r9
+ 767 015c 8F90      		pop r8
+ 768 015e 0F90      		pop r0
+ 769 0160 0FBE      		out __SREG__,r0
+ 770 0162 0F90      		pop r0
+ 771 0164 1F90      		pop __zero_reg__
+ 772 0166 1895      		reti
+ 773               	.LFE133:
+ 775               	.global	Disk_MS_Interface
+ 776               		.data
+ 779               	Disk_MS_Interface:
+ 780 0040 00        		.byte	0
+ 781 0041 03        		.byte	3
+ 782 0042 4000      		.word	64
+ 783 0044 00        		.byte	0
+ 784 0045 04        		.byte	4
+ 785 0046 4000      		.word	64
+ 786 0048 00        		.byte	0
+ 787 0049 01        		.byte	1
+ 788 004a 0000 0000 		.skip 45,0
+ 788      0000 0000 
+ 788      0000 0000 
+ 788      0000 0000 
+ 788      0000 0000 
+ 789               	.global	Generic_HID_Interface
+ 792               	Generic_HID_Interface:
+ 793 0077 01        		.byte	1
+ 794 0078 01        		.byte	1
+ 795 0079 1000      		.word	16
+ 796 007b 00        		.byte	0
+ 797 007c 0000      		.word	PrevHIDReportBuffer
+ 798 007e 07        		.byte	7
+ 799 007f 0000 0000 		.skip 5,0
+ 799      00
+ 800               		.section	.eeprom,"aw",@progbits
+ 803               	LoggingInterval500MS_EEPROM:
+ 804 0000 0A        		.byte	10
+ 805               		.lcomm LoggingInterval500MS_SRAM,1
+ 806               		.lcomm CurrentLoggingTicks,2
+ 807               		.lcomm DiskFATState,1072
+ 808               		.lcomm TempLogFile,32
+ 809               		.lcomm PrevHIDReportBuffer,7
+ 922               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 TempDataLogger.c
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:2      *ABS*:0000003f __SREG__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:3      *ABS*:0000003e __SP_H__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:4      *ABS*:0000003d __SP_L__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:5      *ABS*:00000034 __CCP__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:19     .text.CALLBACK_HID_Device_ProcessHIDReport:00000000 CALLBACK_HID_Device_ProcessHIDReport
+                             .bss:00000000 LoggingInterval500MS_SRAM
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:803    .eeprom:00000000 LoggingInterval500MS_EEPROM
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:61     .text.CALLBACK_HID_Device_CreateHIDReport:00000000 CALLBACK_HID_Device_CreateHIDReport
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:108    .text.CALLBACK_MS_Device_SCSICommandReceived:00000000 CALLBACK_MS_Device_SCSICommandReceived
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:137    .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:779    .data:00000040 Disk_MS_Interface
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:792    .data:00000077 Generic_HID_Interface
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:158    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:205    .text.SetupHardware:00000000 SetupHardware
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:336    .text.CloseLogFile:00000000 CloseLogFile
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:807    .bss:00000433 TempLogFile
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:361    .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:385    .text.OpenLogFile:00000000 OpenLogFile
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:806    .bss:00000003 DiskFATState
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:492    .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:513    .text.main:00000000 main
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:570    .text.__vector_17:00000000 __vector_17
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:805    .bss:00000001 CurrentLoggingTicks
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccvAkbTY.s:808    .bss:00000453 PrevHIDReportBuffer
+
+UNDEFINED SYMBOLS
+DS1307_SetTimeDate
+__eeupd_byte_m32u4
+DS1307_GetTimeDate
+SCSI_DecodeSCSICommand
+MS_Device_ProcessControlRequest
+HID_Device_ProcessControlRequest
+HID_Device_ConfigureEndpoints
+MS_Device_ConfigureEndpoints
+USB_Init
+DataflashManager_ResetDataflashProtections
+f_sync
+f_close
+sprintf
+f_mount
+f_open
+f_lseek
+__eerd_byte_m32u4
+MS_Device_USBTask
+HID_Device_USBTask
+USB_USBTask
+Temperature_GetTemperature
+f_write
+__do_copy_data
+__do_clear_bss
