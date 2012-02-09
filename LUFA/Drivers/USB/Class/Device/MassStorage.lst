@@ -27,239 +27,239 @@
   35               	/* frame size = 2 */
   36 0016 8C01      		movw r16,r24
   37               	.LSM1:
-  38 0018 8EB3      		in r24,62-32
+  38 0018 8091 0000 		lds r24,USB_DeviceState
   39               	.LVL1:
-  40 001a 8430      		cpi r24,lo8(4)
-  41 001c 01F0      		breq .+2
-  42 001e 00C0      		rjmp .L18
+  40 001c 8430      		cpi r24,lo8(4)
+  41 001e 01F0      		breq .+2
+  42 0020 00C0      		rjmp .L18
   43               	.LSM2:
-  44 0020 F801      		movw r30,r16
-  45 0022 9581      		ldd r25,Z+5
+  44 0022 F801      		movw r30,r16
+  45 0024 9581      		ldd r25,Z+5
   46               	.LBB114:
   47               	.LBB115:
   48               	.LSM3:
-  49 0024 9093 E900 		sts 233,r25
+  49 0026 9093 E900 		sts 233,r25
   50               	.LBE115:
   51               	.LBE114:
   52               	.LBB116:
   53               	.LBB117:
   54               	.LSM4:
-  55 0028 8091 E800 		lds r24,232
+  55 002a 8091 E800 		lds r24,232
   56               	.LBE117:
   57               	.LBE116:
   58               	.LSM5:
-  59 002c 85FF      		sbrs r24,5
-  60 002e 00C0      		rjmp .L3
+  59 002e 85FF      		sbrs r24,5
+  60 0030 00C0      		rjmp .L3
   61               	.LBB118:
   62               	.LBB119:
   63               	.LBB120:
   64               	.LBB121:
   65               	.LSM6:
-  66 0030 9093 E900 		sts 233,r25
+  66 0032 9093 E900 		sts 233,r25
   67               	.LBE121:
   68               	.LBE120:
   69               	.LSM7:
-  70 0034 1A82      		std Y+2,__zero_reg__
-  71 0036 1982      		std Y+1,__zero_reg__
+  70 0036 1A82      		std Y+2,__zero_reg__
+  71 0038 1982      		std Y+1,__zero_reg__
   72               	.LVL2:
   73               	.LSM8:
-  74 0038 2AE0      		ldi r18,lo8(10)
-  75 003a E22E      		mov r14,r18
-  76 003c F12C      		mov r15,__zero_reg__
-  77 003e E00E      		add r14,r16
-  78 0040 F11E      		adc r15,r17
+  74 003a 2AE0      		ldi r18,lo8(10)
+  75 003c E22E      		mov r14,r18
+  76 003e F12C      		mov r15,__zero_reg__
+  77 0040 E00E      		add r14,r16
+  78 0042 F11E      		adc r15,r17
   79               	.LBE119:
-  80 0042 6E01      		movw r12,r28
-  81 0044 0894      		sec
-  82 0046 C11C      		adc r12,__zero_reg__
-  83 0048 D11C      		adc r13,__zero_reg__
-  84 004a 00C0      		rjmp .L4
+  80 0044 6E01      		movw r12,r28
+  81 0046 0894      		sec
+  82 0048 C11C      		adc r12,__zero_reg__
+  83 004a D11C      		adc r13,__zero_reg__
+  84 004c 00C0      		rjmp .L4
   85               	.L5:
   86               	.LBB130:
   87               	.LSM9:
-  88 004c F801      		movw r30,r16
-  89 004e 86A9      		ldd r24,Z+54
-  90 0050 8823      		tst r24
-  91 0052 01F0      		breq .+2
-  92 0054 00C0      		rjmp .L3
+  88 004e F801      		movw r30,r16
+  89 0050 86A9      		ldd r24,Z+54
+  90 0052 8823      		tst r24
+  91 0054 01F0      		breq .+2
+  92 0056 00C0      		rjmp .L3
   93               	.L4:
   94               	.LBE130:
   95               	.LSM10:
-  96 0056 C701      		movw r24,r14
-  97 0058 6FE0      		ldi r22,lo8(15)
-  98 005a 70E0      		ldi r23,hi8(15)
-  99 005c A601      		movw r20,r12
- 100 005e 0E94 0000 		call Endpoint_Read_Stream_LE
+  96 0058 C701      		movw r24,r14
+  97 005a 6FE0      		ldi r22,lo8(15)
+  98 005c 70E0      		ldi r23,hi8(15)
+  99 005e A601      		movw r20,r12
+ 100 0060 0E94 0000 		call Endpoint_Read_Stream_LE
  101               	.LBB131:
- 102 0062 8530      		cpi r24,lo8(5)
- 103 0064 01F0      		breq .L5
+ 102 0064 8530      		cpi r24,lo8(5)
+ 103 0066 01F0      		breq .L5
  104               	.LSM11:
- 105 0066 F801      		movw r30,r16
- 106 0068 8285      		ldd r24,Z+10
- 107 006a 9385      		ldd r25,Z+11
- 108 006c A485      		ldd r26,Z+12
- 109 006e B585      		ldd r27,Z+13
- 110 0070 8555      		subi r24,lo8(1128420181)
- 111 0072 9345      		sbci r25,hi8(1128420181)
- 112 0074 A244      		sbci r26,hlo8(1128420181)
- 113 0076 B344      		sbci r27,hhi8(1128420181)
- 114 0078 01F4      		brne .L6
- 115 007a F801      		movw r30,r16
- 116 007c 9789      		ldd r25,Z+23
- 117 007e 8185      		ldd r24,Z+9
- 118 0080 9817      		cp r25,r24
- 119 0082 00F4      		brsh .L6
- 120 0084 8689      		ldd r24,Z+22
- 121 0086 90E0      		ldi r25,lo8(0)
- 122 0088 8F71      		andi r24,lo8(31)
- 123 008a 9070      		andi r25,hi8(31)
- 124 008c 892B      		or r24,r25
- 125 008e 01F4      		brne .L6
- 126 0090 808D      		ldd r24,Z+24
- 127 0092 8823      		tst r24
- 128 0094 01F0      		breq .L6
- 129 0096 8131      		cpi r24,lo8(17)
- 130 0098 00F0      		brlo .L7
+ 105 0068 F801      		movw r30,r16
+ 106 006a 8285      		ldd r24,Z+10
+ 107 006c 9385      		ldd r25,Z+11
+ 108 006e A485      		ldd r26,Z+12
+ 109 0070 B585      		ldd r27,Z+13
+ 110 0072 8555      		subi r24,lo8(1128420181)
+ 111 0074 9345      		sbci r25,hi8(1128420181)
+ 112 0076 A244      		sbci r26,hlo8(1128420181)
+ 113 0078 B344      		sbci r27,hhi8(1128420181)
+ 114 007a 01F4      		brne .L6
+ 115 007c F801      		movw r30,r16
+ 116 007e 9789      		ldd r25,Z+23
+ 117 0080 8185      		ldd r24,Z+9
+ 118 0082 9817      		cp r25,r24
+ 119 0084 00F4      		brsh .L6
+ 120 0086 8689      		ldd r24,Z+22
+ 121 0088 90E0      		ldi r25,lo8(0)
+ 122 008a 8F71      		andi r24,lo8(31)
+ 123 008c 9070      		andi r25,hi8(31)
+ 124 008e 892B      		or r24,r25
+ 125 0090 01F4      		brne .L6
+ 126 0092 808D      		ldd r24,Z+24
+ 127 0094 8823      		tst r24
+ 128 0096 01F0      		breq .L6
+ 129 0098 8131      		cpi r24,lo8(17)
+ 130 009a 00F0      		brlo .L7
  131               	.L6:
  132               	.LBB122:
  133               	.LBB123:
  134               	.LSM12:
- 135 009a 8091 EB00 		lds r24,235
- 136 009e 8062      		ori r24,lo8(32)
- 137 00a0 8093 EB00 		sts 235,r24
+ 135 009c 8091 EB00 		lds r24,235
+ 136 00a0 8062      		ori r24,lo8(32)
+ 137 00a2 8093 EB00 		sts 235,r24
  138               	.LBE123:
  139               	.LBE122:
  140               	.LSM13:
- 141 00a4 F801      		movw r30,r16
- 142 00a6 8181      		ldd r24,Z+1
+ 141 00a6 F801      		movw r30,r16
+ 142 00a8 8181      		ldd r24,Z+1
  143               	.LBB124:
  144               	.LBB125:
  145               	.LSM14:
- 146 00a8 8093 E900 		sts 233,r24
+ 146 00aa 8093 E900 		sts 233,r24
  147               	.LBE125:
  148               	.LBE124:
  149               	.LBB126:
  150               	.LBB127:
  151               	.LSM15:
- 152 00ac 8091 EB00 		lds r24,235
- 153 00b0 8062      		ori r24,lo8(32)
- 154 00b2 8093 EB00 		sts 235,r24
- 155 00b6 00C0      		rjmp .L3
+ 152 00ae 8091 EB00 		lds r24,235
+ 153 00b2 8062      		ori r24,lo8(32)
+ 154 00b4 8093 EB00 		sts 235,r24
+ 155 00b8 00C0      		rjmp .L3
  156               	.L7:
  157               	.LBE127:
  158               	.LBE126:
  159               	.LSM16:
- 160 00b8 1A82      		std Y+2,__zero_reg__
- 161 00ba 1982      		std Y+1,__zero_reg__
+ 160 00ba 1A82      		std Y+2,__zero_reg__
+ 161 00bc 1982      		std Y+1,__zero_reg__
  162               	.LVL3:
  163               	.LSM17:
- 164 00bc 99E1      		ldi r25,lo8(25)
- 165 00be E92E      		mov r14,r25
- 166 00c0 F12C      		mov r15,__zero_reg__
- 167 00c2 E00E      		add r14,r16
- 168 00c4 F11E      		adc r15,r17
+ 164 00be 99E1      		ldi r25,lo8(25)
+ 165 00c0 E92E      		mov r14,r25
+ 166 00c2 F12C      		mov r15,__zero_reg__
+ 167 00c4 E00E      		add r14,r16
+ 168 00c6 F11E      		adc r15,r17
  169               	.LBE131:
- 170 00c6 6E01      		movw r12,r28
- 171 00c8 0894      		sec
- 172 00ca C11C      		adc r12,__zero_reg__
- 173 00cc D11C      		adc r13,__zero_reg__
- 174 00ce 00C0      		rjmp .L8
+ 170 00c8 6E01      		movw r12,r28
+ 171 00ca 0894      		sec
+ 172 00cc C11C      		adc r12,__zero_reg__
+ 173 00ce D11C      		adc r13,__zero_reg__
+ 174 00d0 00C0      		rjmp .L8
  175               	.L9:
  176               	.LBB132:
  177               	.LSM18:
- 178 00d0 F801      		movw r30,r16
- 179 00d2 86A9      		ldd r24,Z+54
- 180 00d4 8823      		tst r24
- 181 00d6 01F0      		breq .+2
- 182 00d8 00C0      		rjmp .L3
+ 178 00d2 F801      		movw r30,r16
+ 179 00d4 86A9      		ldd r24,Z+54
+ 180 00d6 8823      		tst r24
+ 181 00d8 01F0      		breq .+2
+ 182 00da 00C0      		rjmp .L3
  183               	.L8:
  184               	.LBE132:
  185               	.LSM19:
- 186 00da F801      		movw r30,r16
- 187 00dc 608D      		ldd r22,Z+24
- 188 00de C701      		movw r24,r14
- 189 00e0 70E0      		ldi r23,lo8(0)
- 190 00e2 A601      		movw r20,r12
- 191 00e4 0E94 0000 		call Endpoint_Read_Stream_LE
+ 186 00dc F801      		movw r30,r16
+ 187 00de 608D      		ldd r22,Z+24
+ 188 00e0 C701      		movw r24,r14
+ 189 00e2 70E0      		ldi r23,lo8(0)
+ 190 00e4 A601      		movw r20,r12
+ 191 00e6 0E94 0000 		call Endpoint_Read_Stream_LE
  192               	.LBB133:
- 193 00e8 8530      		cpi r24,lo8(5)
- 194 00ea 01F0      		breq .L9
+ 193 00ea 8530      		cpi r24,lo8(5)
+ 194 00ec 01F0      		breq .L9
  195               	.LBB128:
  196               	.LBB129:
  197               	.LSM20:
- 198 00ec 8091 E800 		lds r24,232
- 199 00f0 8B77      		andi r24,lo8(123)
- 200 00f2 8093 E800 		sts 232,r24
+ 198 00ee 8091 E800 		lds r24,232
+ 199 00f2 8B77      		andi r24,lo8(123)
+ 200 00f4 8093 E800 		sts 232,r24
  201               	.LBE129:
  202               	.LBE128:
  203               	.LBE133:
  204               	.LBE118:
  205               	.LBB134:
  206               	.LSM21:
- 207 00f6 F801      		movw r30,r16
- 208 00f8 8689      		ldd r24,Z+22
- 209 00fa 87FF      		sbrs r24,7
- 210 00fc 00C0      		rjmp .L10
+ 207 00f8 F801      		movw r30,r16
+ 208 00fa 8689      		ldd r24,Z+22
+ 209 00fc 87FF      		sbrs r24,7
+ 210 00fe 00C0      		rjmp .L10
  211               	.LSM22:
- 212 00fe 8181      		ldd r24,Z+1
+ 212 0100 8181      		ldd r24,Z+1
  213               	.LBB135:
  214               	.LBB136:
  215               	.LSM23:
- 216 0100 8093 E900 		sts 233,r24
+ 216 0102 8093 E900 		sts 233,r24
  217               	.L10:
  218               	.LBE136:
  219               	.LBE135:
  220               	.LSM24:
- 221 0104 C801      		movw r24,r16
- 222 0106 0E94 0000 		call CALLBACK_MS_Device_SCSICommandReceived
+ 221 0106 C801      		movw r24,r16
+ 222 0108 0E94 0000 		call CALLBACK_MS_Device_SCSICommandReceived
  223               	.LSM25:
- 224 010a 91E0      		ldi r25,lo8(1)
- 225 010c 9827      		eor r25,r24
+ 224 010c 91E0      		ldi r25,lo8(1)
+ 225 010e 9827      		eor r25,r24
  226               	.LVL4:
- 227 010e F801      		movw r30,r16
- 228 0110 95AB      		std Z+53,r25
+ 227 0110 F801      		movw r30,r16
+ 228 0112 95AB      		std Z+53,r25
  229               	.LSM26:
- 230 0112 25E5      		ldi r18,lo8(1396855637)
- 231 0114 33E5      		ldi r19,hi8(1396855637)
- 232 0116 42E4      		ldi r20,hlo8(1396855637)
- 233 0118 53E5      		ldi r21,hhi8(1396855637)
- 234 011a 21A7      		std Z+41,r18
- 235 011c 32A7      		std Z+42,r19
- 236 011e 43A7      		std Z+43,r20
- 237 0120 54A7      		std Z+44,r21
+ 230 0114 25E5      		ldi r18,lo8(1396855637)
+ 231 0116 33E5      		ldi r19,hi8(1396855637)
+ 232 0118 42E4      		ldi r20,hlo8(1396855637)
+ 233 011a 53E5      		ldi r21,hhi8(1396855637)
+ 234 011c 21A7      		std Z+41,r18
+ 235 011e 32A7      		std Z+42,r19
+ 236 0120 43A7      		std Z+43,r20
+ 237 0122 54A7      		std Z+44,r21
  238               	.LSM27:
- 239 0122 2685      		ldd r18,Z+14
- 240 0124 3785      		ldd r19,Z+15
- 241 0126 4089      		ldd r20,Z+16
- 242 0128 5189      		ldd r21,Z+17
- 243 012a 25A7      		std Z+45,r18
- 244 012c 36A7      		std Z+46,r19
- 245 012e 47A7      		std Z+47,r20
- 246 0130 50AB      		std Z+48,r21
+ 239 0124 2685      		ldd r18,Z+14
+ 240 0126 3785      		ldd r19,Z+15
+ 241 0128 4089      		ldd r20,Z+16
+ 242 012a 5189      		ldd r21,Z+17
+ 243 012c 25A7      		std Z+45,r18
+ 244 012e 36A7      		std Z+46,r19
+ 245 0130 47A7      		std Z+47,r20
+ 246 0132 50AB      		std Z+48,r21
  247               	.LSM28:
- 248 0132 2289      		ldd r18,Z+18
- 249 0134 3389      		ldd r19,Z+19
- 250 0136 4489      		ldd r20,Z+20
- 251 0138 5589      		ldd r21,Z+21
- 252 013a 21AB      		std Z+49,r18
- 253 013c 32AB      		std Z+50,r19
- 254 013e 43AB      		std Z+51,r20
- 255 0140 54AB      		std Z+52,r21
+ 248 0134 2289      		ldd r18,Z+18
+ 249 0136 3389      		ldd r19,Z+19
+ 250 0138 4489      		ldd r20,Z+20
+ 251 013a 5589      		ldd r21,Z+21
+ 252 013c 21AB      		std Z+49,r18
+ 253 013e 32AB      		std Z+50,r19
+ 254 0140 43AB      		std Z+51,r20
+ 255 0142 54AB      		std Z+52,r21
  256               	.LSM29:
- 257 0142 8823      		tst r24
- 258 0144 01F4      		brne .L11
- 259 0146 2115      		cp r18,__zero_reg__
- 260 0148 3105      		cpc r19,__zero_reg__
- 261 014a 4105      		cpc r20,__zero_reg__
- 262 014c 5105      		cpc r21,__zero_reg__
- 263 014e 01F0      		breq .L11
+ 257 0144 8823      		tst r24
+ 258 0146 01F4      		brne .L11
+ 259 0148 2115      		cp r18,__zero_reg__
+ 260 014a 3105      		cpc r19,__zero_reg__
+ 261 014c 4105      		cpc r20,__zero_reg__
+ 262 014e 5105      		cpc r21,__zero_reg__
+ 263 0150 01F0      		breq .L11
  264               	.LBB137:
  265               	.LBB138:
  266               	.LSM30:
- 267 0150 8091 EB00 		lds r24,235
+ 267 0152 8091 EB00 		lds r24,235
  268               	.LVL5:
- 269 0154 8062      		ori r24,lo8(32)
- 270 0156 8093 EB00 		sts 235,r24
+ 269 0156 8062      		ori r24,lo8(32)
+ 270 0158 8093 EB00 		sts 235,r24
  271               	.LVL6:
  272               	.L11:
  273               	.LBE138:
@@ -267,98 +267,98 @@
  275               	.LBB139:
  276               	.LBB140:
  277               	.LSM31:
- 278 015a F801      		movw r30,r16
- 279 015c 8581      		ldd r24,Z+5
+ 278 015c F801      		movw r30,r16
+ 279 015e 8581      		ldd r24,Z+5
  280               	.LVL7:
  281               	.LBB141:
  282               	.LBB142:
  283               	.LSM32:
- 284 015e 8093 E900 		sts 233,r24
- 285 0162 00C0      		rjmp .L12
+ 284 0160 8093 E900 		sts 233,r24
+ 285 0164 00C0      		rjmp .L12
  286               	.L13:
  287               	.LBE142:
  288               	.LBE141:
  289               	.LSM33:
- 290 0164 F801      		movw r30,r16
- 291 0166 86A9      		ldd r24,Z+54
- 292 0168 8823      		tst r24
- 293 016a 01F4      		brne .L3
+ 290 0166 F801      		movw r30,r16
+ 291 0168 86A9      		ldd r24,Z+54
+ 292 016a 8823      		tst r24
+ 293 016c 01F4      		brne .L3
  294               	.L12:
  295               	.LBB143:
  296               	.LBB144:
  297               	.LSM34:
- 298 016c 8091 EB00 		lds r24,235
+ 298 016e 8091 EB00 		lds r24,235
  299               	.LBE144:
  300               	.LBE143:
  301               	.LSM35:
- 302 0170 85FD      		sbrc r24,5
- 303 0172 00C0      		rjmp .L13
+ 302 0172 85FD      		sbrc r24,5
+ 303 0174 00C0      		rjmp .L13
  304               	.LSM36:
- 305 0174 F801      		movw r30,r16
- 306 0176 8181      		ldd r24,Z+1
+ 305 0176 F801      		movw r30,r16
+ 306 0178 8181      		ldd r24,Z+1
  307               	.LBB145:
  308               	.LBB146:
  309               	.LSM37:
- 310 0178 8093 E900 		sts 233,r24
- 311 017c 00C0      		rjmp .L14
+ 310 017a 8093 E900 		sts 233,r24
+ 311 017e 00C0      		rjmp .L14
  312               	.L15:
  313               	.LBE146:
  314               	.LBE145:
  315               	.LSM38:
- 316 017e F801      		movw r30,r16
- 317 0180 86A9      		ldd r24,Z+54
- 318 0182 8823      		tst r24
- 319 0184 01F4      		brne .L3
+ 316 0180 F801      		movw r30,r16
+ 317 0182 86A9      		ldd r24,Z+54
+ 318 0184 8823      		tst r24
+ 319 0186 01F4      		brne .L3
  320               	.L14:
  321               	.LBB147:
  322               	.LBB148:
  323               	.LSM39:
- 324 0186 8091 EB00 		lds r24,235
+ 324 0188 8091 EB00 		lds r24,235
  325               	.LBE148:
  326               	.LBE147:
  327               	.LSM40:
- 328 018a 85FD      		sbrc r24,5
- 329 018c 00C0      		rjmp .L15
+ 328 018c 85FD      		sbrc r24,5
+ 329 018e 00C0      		rjmp .L15
  330               	.LSM41:
- 331 018e 1A82      		std Y+2,__zero_reg__
- 332 0190 1982      		std Y+1,__zero_reg__
+ 331 0190 1A82      		std Y+2,__zero_reg__
+ 332 0192 1982      		std Y+1,__zero_reg__
  333               	.LVL8:
  334               	.LSM42:
- 335 0192 89E2      		ldi r24,lo8(41)
- 336 0194 E82E      		mov r14,r24
- 337 0196 F12C      		mov r15,__zero_reg__
- 338 0198 E00E      		add r14,r16
- 339 019a F11E      		adc r15,r17
+ 335 0194 89E2      		ldi r24,lo8(41)
+ 336 0196 E82E      		mov r14,r24
+ 337 0198 F12C      		mov r15,__zero_reg__
+ 338 019a E00E      		add r14,r16
+ 339 019c F11E      		adc r15,r17
  340               	.LBE140:
- 341 019c 6E01      		movw r12,r28
- 342 019e 0894      		sec
- 343 01a0 C11C      		adc r12,__zero_reg__
- 344 01a2 D11C      		adc r13,__zero_reg__
- 345 01a4 00C0      		rjmp .L16
+ 341 019e 6E01      		movw r12,r28
+ 342 01a0 0894      		sec
+ 343 01a2 C11C      		adc r12,__zero_reg__
+ 344 01a4 D11C      		adc r13,__zero_reg__
+ 345 01a6 00C0      		rjmp .L16
  346               	.L17:
  347               	.LBB151:
  348               	.LSM43:
- 349 01a6 F801      		movw r30,r16
- 350 01a8 86A9      		ldd r24,Z+54
- 351 01aa 8823      		tst r24
- 352 01ac 01F4      		brne .L3
+ 349 01a8 F801      		movw r30,r16
+ 350 01aa 86A9      		ldd r24,Z+54
+ 351 01ac 8823      		tst r24
+ 352 01ae 01F4      		brne .L3
  353               	.L16:
  354               	.LBE151:
  355               	.LSM44:
- 356 01ae C701      		movw r24,r14
- 357 01b0 6DE0      		ldi r22,lo8(13)
- 358 01b2 70E0      		ldi r23,hi8(13)
- 359 01b4 A601      		movw r20,r12
- 360 01b6 0E94 0000 		call Endpoint_Write_Stream_LE
+ 356 01b0 C701      		movw r24,r14
+ 357 01b2 6DE0      		ldi r22,lo8(13)
+ 358 01b4 70E0      		ldi r23,hi8(13)
+ 359 01b6 A601      		movw r20,r12
+ 360 01b8 0E94 0000 		call Endpoint_Write_Stream_LE
  361               	.LBB152:
- 362 01ba 8530      		cpi r24,lo8(5)
- 363 01bc 01F0      		breq .L17
+ 362 01bc 8530      		cpi r24,lo8(5)
+ 363 01be 01F0      		breq .L17
  364               	.LBB149:
  365               	.LBB150:
  366               	.LSM45:
- 367 01be 8091 E800 		lds r24,232
- 368 01c2 8E77      		andi r24,lo8(126)
- 369 01c4 8093 E800 		sts 232,r24
+ 367 01c0 8091 E800 		lds r24,232
+ 368 01c4 8E77      		andi r24,lo8(126)
+ 369 01c6 8093 E800 		sts 232,r24
  370               	.L3:
  371               	.LBE150:
  372               	.LBE149:
@@ -366,106 +366,106 @@
  374               	.LBE139:
  375               	.LBE134:
  376               	.LSM46:
- 377 01c8 F801      		movw r30,r16
- 378 01ca 86A9      		ldd r24,Z+54
- 379 01cc 8823      		tst r24
- 380 01ce 01F0      		breq .L18
+ 377 01ca F801      		movw r30,r16
+ 378 01cc 86A9      		ldd r24,Z+54
+ 379 01ce 8823      		tst r24
+ 380 01d0 01F0      		breq .L18
  381               	.LSM47:
- 382 01d0 4581      		ldd r20,Z+5
+ 382 01d2 4581      		ldd r20,Z+5
  383               	.LBB153:
  384               	.LBB154:
  385               	.LSM48:
- 386 01d2 21E0      		ldi r18,lo8(1)
- 387 01d4 30E0      		ldi r19,hi8(1)
- 388 01d6 C901      		movw r24,r18
- 389 01d8 042E      		mov r0,r20
- 390 01da 00C0      		rjmp 2f
- 391 01dc 880F      	1:	lsl r24
- 392 01de 991F      		rol r25
- 393 01e0 0A94      	2:	dec r0
- 394 01e2 02F4      		brpl 1b
- 395 01e4 8093 EA00 		sts 234,r24
+ 386 01d4 21E0      		ldi r18,lo8(1)
+ 387 01d6 30E0      		ldi r19,hi8(1)
+ 388 01d8 C901      		movw r24,r18
+ 389 01da 042E      		mov r0,r20
+ 390 01dc 00C0      		rjmp 2f
+ 391 01de 880F      	1:	lsl r24
+ 392 01e0 991F      		rol r25
+ 393 01e2 0A94      	2:	dec r0
+ 394 01e4 02F4      		brpl 1b
+ 395 01e6 8093 EA00 		sts 234,r24
  396               	.LSM49:
- 397 01e8 1092 EA00 		sts 234,__zero_reg__
+ 397 01ea 1092 EA00 		sts 234,__zero_reg__
  398               	.LBE154:
  399               	.LBE153:
  400               	.LSM50:
- 401 01ec 9181      		ldd r25,Z+1
+ 401 01ee 9181      		ldd r25,Z+1
  402               	.LBB155:
  403               	.LBB156:
  404               	.LSM51:
- 405 01ee 092E      		mov r0,r25
- 406 01f0 00C0      		rjmp 2f
- 407 01f2 220F      	1:	lsl r18
- 408 01f4 331F      		rol r19
- 409 01f6 0A94      	2:	dec r0
- 410 01f8 02F4      		brpl 1b
- 411 01fa 2093 EA00 		sts 234,r18
+ 405 01f0 092E      		mov r0,r25
+ 406 01f2 00C0      		rjmp 2f
+ 407 01f4 220F      	1:	lsl r18
+ 408 01f6 331F      		rol r19
+ 409 01f8 0A94      	2:	dec r0
+ 410 01fa 02F4      		brpl 1b
+ 411 01fc 2093 EA00 		sts 234,r18
  412               	.LSM52:
- 413 01fe 1092 EA00 		sts 234,__zero_reg__
+ 413 0200 1092 EA00 		sts 234,__zero_reg__
  414               	.LBE156:
  415               	.LBE155:
  416               	.LBB157:
  417               	.LBB158:
  418               	.LSM53:
- 419 0202 4093 E900 		sts 233,r20
+ 419 0204 4093 E900 		sts 233,r20
  420               	.LBE158:
  421               	.LBE157:
  422               	.LBB159:
  423               	.LBB160:
  424               	.LSM54:
- 425 0206 8091 EB00 		lds r24,235
- 426 020a 8061      		ori r24,lo8(16)
- 427 020c 8093 EB00 		sts 235,r24
+ 425 0208 8091 EB00 		lds r24,235
+ 426 020c 8061      		ori r24,lo8(16)
+ 427 020e 8093 EB00 		sts 235,r24
  428               	.LBE160:
  429               	.LBE159:
  430               	.LBB161:
  431               	.LBB162:
  432               	.LSM55:
- 433 0210 8091 EB00 		lds r24,235
- 434 0214 8860      		ori r24,lo8(8)
- 435 0216 8093 EB00 		sts 235,r24
+ 433 0212 8091 EB00 		lds r24,235
+ 434 0216 8860      		ori r24,lo8(8)
+ 435 0218 8093 EB00 		sts 235,r24
  436               	.LBE162:
  437               	.LBE161:
  438               	.LBB163:
  439               	.LBB164:
  440               	.LSM56:
- 441 021a 9093 E900 		sts 233,r25
+ 441 021c 9093 E900 		sts 233,r25
  442               	.LBE164:
  443               	.LBE163:
  444               	.LBB165:
  445               	.LBB166:
  446               	.LSM57:
- 447 021e 8091 EB00 		lds r24,235
- 448 0222 8061      		ori r24,lo8(16)
- 449 0224 8093 EB00 		sts 235,r24
+ 447 0220 8091 EB00 		lds r24,235
+ 448 0224 8061      		ori r24,lo8(16)
+ 449 0226 8093 EB00 		sts 235,r24
  450               	.LBE166:
  451               	.LBE165:
  452               	.LBB167:
  453               	.LBB168:
  454               	.LSM58:
- 455 0228 8091 EB00 		lds r24,235
- 456 022c 8860      		ori r24,lo8(8)
- 457 022e 8093 EB00 		sts 235,r24
+ 455 022a 8091 EB00 		lds r24,235
+ 456 022e 8860      		ori r24,lo8(8)
+ 457 0230 8093 EB00 		sts 235,r24
  458               	.LBE168:
  459               	.LBE167:
  460               	.LSM59:
- 461 0232 16AA      		std Z+54,__zero_reg__
+ 461 0234 16AA      		std Z+54,__zero_reg__
  462               	.L18:
  463               	/* epilogue start */
  464               	.LSM60:
- 465 0234 0F90      		pop __tmp_reg__
- 466 0236 0F90      		pop __tmp_reg__
- 467 0238 CF91      		pop r28
- 468 023a DF91      		pop r29
- 469 023c 1F91      		pop r17
- 470 023e 0F91      		pop r16
+ 465 0236 0F90      		pop __tmp_reg__
+ 466 0238 0F90      		pop __tmp_reg__
+ 467 023a CF91      		pop r28
+ 468 023c DF91      		pop r29
+ 469 023e 1F91      		pop r17
+ 470 0240 0F91      		pop r16
  471               	.LVL9:
- 472 0240 FF90      		pop r15
- 473 0242 EF90      		pop r14
- 474 0244 DF90      		pop r13
- 475 0246 CF90      		pop r12
- 476 0248 0895      		ret
+ 472 0242 FF90      		pop r15
+ 473 0244 EF90      		pop r14
+ 474 0246 DF90      		pop r13
+ 475 0248 CF90      		pop r12
+ 476 024a 0895      		ret
  477               	.LFE98:
  479               		.section	.text.MS_Device_ConfigureEndpoints,"ax",@progbits
  480               	.global	MS_Device_ConfigureEndpoints
@@ -688,17 +688,18 @@
  741               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 MassStorage.c
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc9XEt0V.s:2      *ABS*:0000003f __SREG__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc9XEt0V.s:3      *ABS*:0000003e __SP_H__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc9XEt0V.s:4      *ABS*:0000003d __SP_L__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc9XEt0V.s:5      *ABS*:00000034 __CCP__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc9XEt0V.s:6      *ABS*:00000000 __tmp_reg__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc9XEt0V.s:7      *ABS*:00000001 __zero_reg__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc9XEt0V.s:19     .text.MS_Device_USBTask:00000000 MS_Device_USBTask
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc9XEt0V.s:482    .text.MS_Device_ConfigureEndpoints:00000000 MS_Device_ConfigureEndpoints
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc9XEt0V.s:609    .text.MS_Device_ProcessControlRequest:00000000 MS_Device_ProcessControlRequest
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccX79n7S.s:2      *ABS*:0000003f __SREG__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccX79n7S.s:3      *ABS*:0000003e __SP_H__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccX79n7S.s:4      *ABS*:0000003d __SP_L__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccX79n7S.s:5      *ABS*:00000034 __CCP__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccX79n7S.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccX79n7S.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccX79n7S.s:19     .text.MS_Device_USBTask:00000000 MS_Device_USBTask
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccX79n7S.s:482    .text.MS_Device_ConfigureEndpoints:00000000 MS_Device_ConfigureEndpoints
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccX79n7S.s:609    .text.MS_Device_ProcessControlRequest:00000000 MS_Device_ProcessControlRequest
 
 UNDEFINED SYMBOLS
+USB_DeviceState
 Endpoint_Read_Stream_LE
 CALLBACK_MS_Device_SCSICommandReceived
 Endpoint_Write_Stream_LE

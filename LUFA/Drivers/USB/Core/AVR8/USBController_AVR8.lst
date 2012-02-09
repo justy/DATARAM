@@ -114,78 +114,78 @@
  124               	.LBB82:
  125               	.LBB83:
  126               	.LSM17:
- 127 002a 1EBA      		out 62-32,__zero_reg__
+ 127 002a 1092 0000 		sts USB_DeviceState,__zero_reg__
  128               	.LSM18:
- 129 002c 1092 0000 		sts USB_Device_ConfigurationNumber,__zero_reg__
+ 129 002e 1092 0000 		sts USB_Device_ConfigurationNumber,__zero_reg__
  130               	.LSM19:
- 131 0030 1092 0000 		sts USB_Device_RemoteWakeupEnabled,__zero_reg__
+ 131 0032 1092 0000 		sts USB_Device_RemoteWakeupEnabled,__zero_reg__
  132               	.LSM20:
- 133 0034 1092 0000 		sts USB_Device_CurrentlySelfPowered,__zero_reg__
+ 133 0036 1092 0000 		sts USB_Device_CurrentlySelfPowered,__zero_reg__
  134               	.LBB84:
  135               	.LBB85:
  136               	.LSM21:
- 137 0038 80EE      		ldi r24,lo8(224)
- 138 003a E82E      		mov r14,r24
- 139 003c F12C      		mov r15,__zero_reg__
- 140 003e F701      		movw r30,r14
- 141 0040 8081      		ld r24,Z
- 142 0042 8B7F      		andi r24,lo8(-5)
- 143 0044 8083      		st Z,r24
+ 137 003a 80EE      		ldi r24,lo8(224)
+ 138 003c E82E      		mov r14,r24
+ 139 003e F12C      		mov r15,__zero_reg__
+ 140 0040 F701      		movw r30,r14
+ 141 0042 8081      		ld r24,Z
+ 142 0044 8B7F      		andi r24,lo8(-5)
+ 143 0046 8083      		st Z,r24
  144               	.LBE85:
  145               	.LBE84:
  146               	.LBB86:
  147               	.LBB87:
  148               	.LSM22:
- 149 0046 F801      		movw r30,r16
- 150 0048 8081      		ld r24,Z
- 151 004a 8160      		ori r24,lo8(1)
- 152 004c 8083      		st Z,r24
+ 149 0048 F801      		movw r30,r16
+ 150 004a 8081      		ld r24,Z
+ 151 004c 8160      		ori r24,lo8(1)
+ 152 004e 8083      		st Z,r24
  153               	.LBE87:
  154               	.LBE86:
  155               	.LBB88:
  156               	.LBB89:
  157               	.LSM23:
- 158 004e 80E0      		ldi r24,lo8(0)
- 159 0050 60E0      		ldi r22,lo8(0)
- 160 0052 42E0      		ldi r20,lo8(2)
- 161 0054 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
+ 158 0050 80E0      		ldi r24,lo8(0)
+ 159 0052 60E0      		ldi r22,lo8(0)
+ 160 0054 42E0      		ldi r20,lo8(2)
+ 161 0056 0E94 0000 		call Endpoint_ConfigureEndpoint_Prv
  162               	.LBE89:
  163               	.LBE88:
  164               	.LBB90:
  165               	.LBB91:
  166               	.LSM24:
- 167 0058 E1EE      		ldi r30,lo8(225)
- 168 005a F0E0      		ldi r31,hi8(225)
- 169 005c 8081      		ld r24,Z
- 170 005e 8E7F      		andi r24,lo8(-2)
- 171 0060 8083      		st Z,r24
+ 167 005a E1EE      		ldi r30,lo8(225)
+ 168 005c F0E0      		ldi r31,hi8(225)
+ 169 005e 8081      		ld r24,Z
+ 170 0060 8E7F      		andi r24,lo8(-2)
+ 171 0062 8083      		st Z,r24
  172               	.LBE91:
  173               	.LBE90:
  174               	.LBB92:
  175               	.LBB93:
  176               	.LSM25:
- 177 0062 E2EE      		ldi r30,lo8(226)
- 178 0064 F0E0      		ldi r31,hi8(226)
- 179 0066 8081      		ld r24,Z
- 180 0068 8160      		ori r24,lo8(1)
- 181 006a 8083      		st Z,r24
+ 177 0064 E2EE      		ldi r30,lo8(226)
+ 178 0066 F0E0      		ldi r31,hi8(226)
+ 179 0068 8081      		ld r24,Z
+ 180 006a 8160      		ori r24,lo8(1)
+ 181 006c 8083      		st Z,r24
  182               	.LBE93:
  183               	.LBE92:
  184               	.LBB94:
  185               	.LBB95:
  186               	.LSM26:
- 187 006c 8081      		ld r24,Z
- 188 006e 8860      		ori r24,lo8(8)
- 189 0070 8083      		st Z,r24
+ 187 006e 8081      		ld r24,Z
+ 188 0070 8860      		ori r24,lo8(8)
+ 189 0072 8083      		st Z,r24
  190               	.LBE95:
  191               	.LBE94:
  192               	.LBB96:
  193               	.LBB97:
  194               	.LSM27:
- 195 0072 F701      		movw r30,r14
- 196 0074 8081      		ld r24,Z
- 197 0076 8E7F      		andi r24,lo8(-2)
- 198 0078 8083      		st Z,r24
+ 195 0074 F701      		movw r30,r14
+ 196 0076 8081      		ld r24,Z
+ 197 0078 8E7F      		andi r24,lo8(-2)
+ 198 007a 8083      		st Z,r24
  199               	.LBE97:
  200               	.LBE96:
  201               	.LBE83:
@@ -193,19 +193,19 @@
  203               	.LBB98:
  204               	.LBB99:
  205               	.LSM28:
- 206 007a F801      		movw r30,r16
- 207 007c 8081      		ld r24,Z
- 208 007e 8061      		ori r24,lo8(16)
- 209 0080 8083      		st Z,r24
+ 206 007c F801      		movw r30,r16
+ 207 007e 8081      		ld r24,Z
+ 208 0080 8061      		ori r24,lo8(16)
+ 209 0082 8083      		st Z,r24
  210               	/* epilogue start */
  211               	.LBE99:
  212               	.LBE98:
  213               	.LSM29:
- 214 0082 1F91      		pop r17
- 215 0084 0F91      		pop r16
- 216 0086 FF90      		pop r15
- 217 0088 EF90      		pop r14
- 218 008a 0895      		ret
+ 214 0084 1F91      		pop r17
+ 215 0086 0F91      		pop r16
+ 216 0088 FF90      		pop r15
+ 217 008a EF90      		pop r14
+ 218 008c 0895      		ret
  219               	.LFE85:
  221               		.section	.text.USB_Init,"ax",@progbits
  222               	.global	USB_Init
@@ -239,20 +239,21 @@
  292               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 USBController_AVR8.c
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccJREq4H.s:2      *ABS*:0000003f __SREG__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccJREq4H.s:3      *ABS*:0000003e __SP_H__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccJREq4H.s:4      *ABS*:0000003d __SP_L__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccJREq4H.s:5      *ABS*:00000034 __CCP__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccJREq4H.s:6      *ABS*:00000000 __tmp_reg__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccJREq4H.s:7      *ABS*:00000001 __zero_reg__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccJREq4H.s:19     .text.USB_Disable:00000000 USB_Disable
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccJREq4H.s:82     .text.USB_ResetInterface:00000000 USB_ResetInterface
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccJREq4H.s:224    .text.USB_Init:00000000 USB_Init
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccKnHDDP.s:2      *ABS*:0000003f __SREG__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccKnHDDP.s:3      *ABS*:0000003e __SP_H__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccKnHDDP.s:4      *ABS*:0000003d __SP_L__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccKnHDDP.s:5      *ABS*:00000034 __CCP__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccKnHDDP.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccKnHDDP.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccKnHDDP.s:19     .text.USB_Disable:00000000 USB_Disable
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccKnHDDP.s:82     .text.USB_ResetInterface:00000000 USB_ResetInterface
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccKnHDDP.s:224    .text.USB_Init:00000000 USB_Init
 
 UNDEFINED SYMBOLS
 USB_INT_DisableAllInterrupts
 USB_INT_ClearAllInterrupts
 USB_IsInitialized
+USB_DeviceState
 USB_Device_ConfigurationNumber
 USB_Device_RemoteWakeupEnabled
 USB_Device_CurrentlySelfPowered

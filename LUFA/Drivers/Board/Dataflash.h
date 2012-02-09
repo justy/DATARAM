@@ -124,6 +124,7 @@
 	/* Includes: */
 	#include "../../Common/Common.h"
 	#include "../Peripheral/SPI.h"
+	#include "../Peripheral/DATARAM.h"
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)
@@ -151,7 +152,7 @@
 			 *  \note The microcontroller's SPI driver must be initialized before any of the dataflash commands are used.
 			 */
 			static inline void Dataflash_Init(void);
-
+			
 			/** Determines the currently selected dataflash chip.
 			 *
 			 *  \return Mask of the currently selected Dataflash chip, either \ref DATAFLASH_NO_CHIP if no chip is selected
@@ -208,7 +209,9 @@
 			static inline uint8_t Dataflash_TransferByte(const uint8_t Byte) ATTR_ALWAYS_INLINE;
 			static inline uint8_t Dataflash_TransferByte(const uint8_t Byte)
 			{
-				return SPI_TransferByte(Byte);
+			  // TODO: Ensure that I'm using valid return codes (Actually it's just the data itself)
+			  return DATARAM_TransferByte(Byte);
+				//return SPI_TransferByte(Byte);
 			}
 
 			/** Sends a byte to the currently selected dataflash IC, and ignores the next byte from the dataflash.
@@ -218,7 +221,8 @@
 			static inline void Dataflash_SendByte(const uint8_t Byte) ATTR_ALWAYS_INLINE;
 			static inline void Dataflash_SendByte(const uint8_t Byte)
 			{
-				SPI_SendByte(Byte);
+				//SPI_SendByte(Byte);
+				return DATARAM_SendByte(Byte);
 			}
 
 			/** Sends a dummy byte to the currently selected dataflash IC, and returns the next byte from the dataflash.
@@ -228,8 +232,8 @@
 			static inline uint8_t Dataflash_ReceiveByte(void) ATTR_ALWAYS_INLINE ATTR_WARN_UNUSED_RESULT;
 			static inline uint8_t Dataflash_ReceiveByte(void)
 			{
-			  // I want to hack this in my own board-specific way, but here will do for now..
-				return SPI_ReceiveByte();
+			  return DATARAM_ReceiveByte();
+				//return SPI_ReceiveByte();
 			}
 
 		/* Includes: */

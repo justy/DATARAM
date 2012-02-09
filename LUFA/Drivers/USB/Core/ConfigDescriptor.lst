@@ -316,15 +316,15 @@
  379               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 ConfigDescriptor.c
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:2      *ABS*:0000003f __SREG__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:3      *ABS*:0000003e __SP_H__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:4      *ABS*:0000003d __SP_L__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:5      *ABS*:00000034 __CCP__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:6      *ABS*:00000000 __tmp_reg__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:7      *ABS*:00000001 __zero_reg__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:19     .text.USB_GetNextDescriptorOfType:00000000 USB_GetNextDescriptorOfType
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:92     .text.USB_GetNextDescriptorOfTypeBefore:00000000 USB_GetNextDescriptorOfTypeBefore
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:172    .text.USB_GetNextDescriptorOfTypeAfter:00000000 USB_GetNextDescriptorOfTypeAfter
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccHHoPbM.s:218    .text.USB_GetNextDescriptorComp:00000000 USB_GetNextDescriptorComp
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:2      *ABS*:0000003f __SREG__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:3      *ABS*:0000003e __SP_H__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:4      *ABS*:0000003d __SP_L__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:5      *ABS*:00000034 __CCP__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:19     .text.USB_GetNextDescriptorOfType:00000000 USB_GetNextDescriptorOfType
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:92     .text.USB_GetNextDescriptorOfTypeBefore:00000000 USB_GetNextDescriptorOfTypeBefore
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:172    .text.USB_GetNextDescriptorOfTypeAfter:00000000 USB_GetNextDescriptorOfTypeAfter
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc0YYcP2.s:218    .text.USB_GetNextDescriptorComp:00000000 USB_GetNextDescriptorComp
 
 NO UNDEFINED SYMBOLS

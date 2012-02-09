@@ -54,7 +54,7 @@
  *        individual target module documentation for the API specific to your target processor.
  */
 
-#ifndef __SPI_H__
+#ifndef __SPI_H__1
 #define __SPI_H__
 
 	/* Macros: */

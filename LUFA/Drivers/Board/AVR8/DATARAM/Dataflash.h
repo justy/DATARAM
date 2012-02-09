@@ -53,6 +53,7 @@
 	/* Includes: */
 		#include "../../../../Common/Common.h"
 		#include "../../../Misc/AT45DB321C.h"  // JJC: Not really needed but saves a lot of compile errors
+		#include "../../../Peripheral/DATARAM.h"
 
 	/* Preprocessor Checks: */
 		#if !defined(__INCLUDE_FROM_DATAFLASH_H)
@@ -79,10 +80,10 @@
 			#define DATAFLASH_CHIP1                      0
 
 			/** Internal main memory page size for the board's dataflash IC. */
-			#define DATAFLASH_PAGE_SIZE                  512
+      #define DATAFLASH_PAGE_SIZE                  1024 //512
 
 			/** Total number of pages inside the board's dataflash IC. */
-			#define DATAFLASH_PAGES                      2
+			#define DATAFLASH_PAGES                      1 //2
 
 		/* Inline Functions: */
 			/** Initializes the dataflash driver so that commands and data may be sent to an attached dataflash IC.
@@ -137,7 +138,7 @@
 			 */
 			static inline void Dataflash_SelectChipFromPage(const uint16_t PageAddress)
 			{
-			  // Nothing to do.
+			  // Nothing to do.  (There's only one chip)
         return;
 				Dataflash_DeselectChip();
 
@@ -165,6 +166,7 @@
 			 */
 			static inline void Dataflash_WaitWhileBusy(void)
 			{
+			  // This shouldn't be do anything, as DATARAM calls block
         return;
 				Dataflash_ToggleSelectedChipCS();
 				Dataflash_SendByte(DF_CMD_GETSTATUS);
@@ -181,10 +183,11 @@
 			static inline void Dataflash_SendAddressBytes(uint16_t PageAddress,
 			                                              const uint16_t BufferByte)
 			{
-        return;
-				Dataflash_SendByte(PageAddress >> 6);
-				Dataflash_SendByte((PageAddress << 2) | (BufferByte >> 8));
-				Dataflash_SendByte(BufferByte);
+        // Set the address - with only one page, the address is simply BufferByte
+        DATARAM_SendAddress(BufferByte);
+				//Dataflash_SendByte(PageAddress >> 6);
+				//Dataflash_SendByte((PageAddress << 2) | (BufferByte >> 8));
+				//Dataflash_SendByte(BufferByte);
 			}
 
 #endif

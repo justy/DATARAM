@@ -235,17 +235,17 @@
  278               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 Descriptors.c
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:2      *ABS*:0000003f __SREG__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:3      *ABS*:0000003e __SP_H__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:4      *ABS*:0000003d __SP_L__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:5      *ABS*:00000034 __CCP__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:6      *ABS*:00000000 __tmp_reg__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:7      *ABS*:00000001 __zero_reg__
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:19     .text.CALLBACK_USB_GetDescriptor:00000000 CALLBACK_USB_GetDescriptor
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:133    .progmem.data:00000000 DeviceDescriptor
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:151    .progmem.data:00000012 ConfigurationDescriptor
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:184    .progmem.data:00000032 LanguageString
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:191    .progmem.data:00000036 ManufacturerString
-/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//cc25Ql1t.s:219    .progmem.data:00000062 ProductString
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:2      *ABS*:0000003f __SREG__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:3      *ABS*:0000003e __SP_H__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:4      *ABS*:0000003d __SP_L__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:5      *ABS*:00000034 __CCP__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:19     .text.CALLBACK_USB_GetDescriptor:00000000 CALLBACK_USB_GetDescriptor
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:133    .progmem.data:00000000 DeviceDescriptor
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:151    .progmem.data:00000012 ConfigurationDescriptor
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:184    .progmem.data:00000032 LanguageString
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:191    .progmem.data:00000036 ManufacturerString
+/var/folders/ml/6pvjwk4n6698h5qhg_5pqkt80000gn/T//ccOdaA07.s:219    .progmem.data:00000062 ProductString
 
 NO UNDEFINED SYMBOLS
