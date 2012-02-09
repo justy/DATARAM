@@ -79,6 +79,7 @@
 
 	/* Includes: */
 		#include "../../../Common/Common.h"
+		#include <avr/eeprom.h>
 
 	/* Enable C linkage for C++ Compilers: */
 		#if defined(__cplusplus)
